@@ -1,11 +1,11 @@
 ---
-/** About: tinted panel holding "Why people in retail?" and "Beyond the role", with a blush brush accent. */
-import Handwritten from './Handwritten.astro';
+/** About: tinted panel holding "Why people in retail?" and "Beyond the role", with the blush brush statement. */
+import Statement from './Statement.astro';
 interface Props { heading: string; groups: { subheading: string; paragraphs: string[] }[]; accent?: string; id?: string }
 const { heading, groups, accent, id = 'why' } = Astro.props;
 ---
 <div class="why-panel" id={id}>
-  {accent && <div class="why-accent hide-sm"><div class="brush"></div><Handwritten text={accent} size="md" rotate={-8} /></div>}
+  {accent && <div class="why-accent"><Statement variant="brush" text={accent} size="md" rotate={-8} /></div>}
   <h2>{heading}</h2>
   {groups.map((g) => (
     <div class="why-group">
@@ -16,12 +16,13 @@ const { heading, groups, accent, id = 'why' } = Astro.props;
 </div>
 <style>
   .why-panel { position: relative; background: var(--pale-blue-100); border-radius: var(--radius-panel); padding: var(--space-4); overflow: hidden; }
-  .why-panel h2 { max-width: 60%; }
+  .why-panel h2 { max-width: 55%; }
   .why-group + .why-group { margin-top: var(--space-3); }
-  .why-group h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
-  .why-group p { max-width: 40ch; }
-  .why-accent { position: absolute; top: var(--space-3); right: var(--space-3); width: 12rem; height: 12rem; display: flex; align-items: center; justify-content: center; }
-  .brush { position: absolute; inset: 0; background: var(--blush); border-radius: 58% 42% 55% 45% / 45% 55% 45% 55%; transform: rotate(-12deg); }
-  .why-accent :global(.hw) { position: relative; }
-  @media (max-width: 640px) { .why-panel h2 { max-width: none; } }
+  .why-group h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .why-group p { max-width: 42ch; }
+  .why-accent { position: absolute; top: var(--space-3); right: var(--space-3); }
+  @media (max-width: 640px) {
+    .why-panel h2 { max-width: none; }
+    .why-accent { position: static; display: flex; justify-content: center; margin-bottom: var(--space-2); }
+  }
 </style>

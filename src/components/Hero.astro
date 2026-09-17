@@ -6,7 +6,7 @@
 import Button from './Button.astro';
 import Handwritten from './Handwritten.astro';
 import ImageSlot from './ImageSlot.astro';
-import type { ImageSlotName } from '../config/images';
+import { imageSlots, type ImageSlotName, type ImageSlotDef } from '../config/images';
 type Part = { text: string; script?: boolean; br?: boolean };
 interface Props {
   variant?: 'home' | 'about' | 'talk' | 'simple';
@@ -20,6 +20,7 @@ interface Props {
   accent?: string;
 }
 const { variant = 'home', eyebrow, title, lead, body = [], primaryCta, secondaryCta, imageSlot, accent } = Astro.props;
+const bakedAccent = imageSlot ? Boolean((imageSlots[imageSlot] as ImageSlotDef).bakedAccent) : false;
 ---
 <section class={`hero hero-${variant}`}>
   <div class="hero-text">
@@ -40,19 +41,19 @@ const { variant = 'home', eyebrow, title, lead, body = [], primaryCta, secondary
   {variant !== 'simple' && imageSlot && (
     <div class="hero-media">
       <ImageSlot name={imageSlot} priority fill />
-      {accent && <div class="hero-accent hide-sm"><Handwritten text={accent} size="lg" rotate={-6} /></div>}
+      {accent && !bakedAccent && <div class="hero-accent hide-sm"><Handwritten text={accent} size="lg" rotate={-6} /></div>}
     </div>
   )}
 </section>
 <style>
   .hero { display: grid; grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, calc(var(--container) / 2)) minmax(0, calc(var(--container) / 2)) minmax(var(--gutter), 1fr); background: var(--cream); }
-  .hero-text { grid-column: 2; padding: clamp(2.5rem, 2rem + 3vw, 5rem) clamp(1.5rem, 1rem + 3vw, 4rem) clamp(2.5rem, 2rem + 3vw, 5rem) 0; display: flex; flex-direction: column; justify-content: center; }
+  .hero-text { grid-column: 2; padding: clamp(2rem, 1.5rem + 2vw, 3.5rem) clamp(1.5rem, 1rem + 3vw, 4rem) clamp(2rem, 1.5rem + 2vw, 3.5rem) 0; display: flex; flex-direction: column; justify-content: center; }
   .hero-media { grid-column: 3 / 5; position: relative; min-height: 100%; }
   .hero-media :global(.slot) { height: 100%; }
   .hero-title { margin-bottom: 0.75rem; }
   .hero-title .script { font-size: 1.12em; line-height: 0.9; }
   .hero-eyebrow { margin-bottom: 1rem; }
-  .hero-body { max-width: 46ch; }
+  .hero-body { max-width: 46ch; font-size: 1.125rem; }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
   .hero-accent { position: absolute; top: 12%; right: 6%; max-width: 30%; }
   .hero-simple { grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, var(--container)) minmax(var(--gutter), 1fr); }

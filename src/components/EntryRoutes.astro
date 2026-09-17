@@ -12,7 +12,7 @@ const routes = (await getCollection('routes')).sort((a, b) => a.data.order - b.d
   <div class="container grid grid-4">
     {routes.map((r) => (
       <article class={`route-card tint-${r.data.tint}`}>
-        <Icon name={r.data.icon} size={44} class="route-icon" strokeWidth={1.5} />
+        <Icon name={r.data.icon} size={54} class="route-icon" strokeWidth={1.4} />
         <h3 class="route-title">{r.data.title}</h3>
         <p class="route-summary">{r.data.summary}</p>
         <Button href={r.data.launchHref} label={ctaLabel} hiddenLabel={`about ${r.data.title}`} variant="text" />
@@ -25,8 +25,8 @@ const routes = (await getCollection('routes')).sort((a, b) => a.data.order - b.d
   .routes .grid { margin-top: calc(-1 * var(--space-3)); }
   .route-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.5rem; padding: var(--space-4) var(--space-3) var(--space-3); border-radius: var(--radius-card); min-height: 100%; }
   .route-icon { color: var(--teal); margin-bottom: 0.25rem; }
-  .route-title { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin: 0; }
-  .route-summary { font-size: var(--fs-small); margin: 0 0 0.25rem; max-width: 30ch; }
+  .route-title { font-family: var(--font-sans); font-size: 1.0625rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin: 0; }
+  .route-summary { font-size: 1rem; margin: 0 0 0.25rem; max-width: 28ch; }
   .route-card :global(.btn-text) { margin-top: auto; }
   .tint-sage { background: var(--sage-200); }
   .tint-blush { background: var(--blush); }

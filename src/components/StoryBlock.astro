@@ -2,23 +2,21 @@
 /** About: "Our story". Optional founder image slot renders only when supplied (decision OD4). */
 import ImageSlot from './ImageSlot.astro';
 import Button from './Button.astro';
-import Heart from './Heart.astro';
+import Statement from './Statement.astro';
 interface Props { heading: string; subheading: string; paragraphs: string[]; pullLine: string; cta?: { label: string; href: string }; id?: string }
 const { heading, subheading, paragraphs, pullLine, cta, id = 'our-story' } = Astro.props;
 ---
 <div class="story" id={id}>
   <ImageSlot name="about-story" hideIfMissing class="story-image" />
-  <h2>{heading}</h2>
+  <h2 class="story-heading">{heading}</h2>
   <p class="subhead-coral">{subheading}</p>
   {paragraphs.map((p) => <p>{p}</p>)}
   {cta && <div class="story-cta"><Button href={cta.href} label={cta.label} variant="secondary" /></div>}
-  <p class="story-pull"><span class="script-note">{pullLine}</span> <Heart class="story-heart" size={20} /></p>
+  <Statement variant="pull" text={pullLine} />
 </div>
 <style>
   .story p { max-width: 46ch; }
+  .story-heading { font-size: clamp(2.25rem, 1.6rem + 2.2vw, 3.25rem); }
   .story :global(.story-image) { border-radius: var(--radius-card); max-width: 22rem; margin-bottom: var(--space-3); }
   .story-cta { margin-top: var(--space-2); }
-  .story-pull { margin-top: var(--space-4); display: flex; align-items: flex-end; gap: 0.5rem; transform: rotate(-3deg); }
-  .story-pull .script-note { font-size: clamp(1.35rem, 1.1rem + 1vw, 1.9rem); }
-  .story-pull :global(.story-heart) { color: var(--coral); }
 </style>

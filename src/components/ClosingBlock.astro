@@ -14,13 +14,14 @@ const { heading, paragraph, cta, accent, id = 'together' } = Astro.props;
     <p>{paragraph}</p>
     <div class="closing-cta"><Button href={site.contact.emailHref} label={cta.label} hiddenLabel={cta.hiddenLabel} variant="primary" /></div>
   </div>
-  {accent && <div class="closing-accent hide-md"><span class="rule-v"></span><Handwritten text={accent} size="md" rotate={-8} /></div>}
+  {accent && <div class="closing-accent accent-side"><span class="rule-v"></span><Handwritten text={accent} size="lg" rotate={-8} /></div>}
 </section>
 <style>
   .closing { display: grid; grid-template-columns: 40fr 45fr 15fr; background: var(--cream); }
   .closing-text { padding: var(--space-5) clamp(1.5rem, 1rem + 2vw, 3rem); display: flex; flex-direction: column; justify-content: center; }
   .closing-text p { max-width: 44ch; }
   .closing-cta { margin-top: var(--space-2); }
-  .closing-accent { display: flex; align-items: center; gap: var(--space-3); padding-right: var(--gutter); }
+  .closing-accent { padding-right: var(--gutter); }
+  @media (max-width: 900px) { .closing-accent { padding: 0 var(--gutter) var(--space-4); } }
   @media (max-width: 900px) { .closing { grid-template-columns: 1fr; } .closing-text { padding-inline: var(--gutter); } }
 </style>

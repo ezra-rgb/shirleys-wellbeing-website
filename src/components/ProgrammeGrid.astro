@@ -24,7 +24,7 @@ const programmes = (await getCollection('programmes')).filter((p) => p.data.show
 </section>
 <style>
   .building { background: var(--band); padding-block: var(--space-section); }
-  .building-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-3); margin-bottom: var(--space-4); }
+  .building-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-3); margin-bottom: var(--space-3); }
   .building-intro { max-width: 60ch; margin: 0; }
   .building-all { flex: none; }
   @media (max-width: 640px) { .building-head { flex-direction: column; } }

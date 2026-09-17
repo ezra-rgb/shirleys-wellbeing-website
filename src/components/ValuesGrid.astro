@@ -10,7 +10,7 @@ const { heading, id = 'values', compact = false } = Astro.props;
   <ul class="values-list">
     {values.map((v) => (
       <li class="value">
-        <span class={`value-circle c-${v.colour}`}><Icon name={v.icon} size={30} strokeWidth={1.6} /></span>
+        <span class={`value-circle c-${v.colour}`}><Icon name={v.icon} size={36} strokeWidth={1.6} /></span>
         <h3 class="value-name">{v.name}</h3>
         <p class="value-line">{v.line}</p>
       </li>
@@ -20,12 +20,12 @@ const { heading, id = 'values', compact = false } = Astro.props;
 <style>
   .values-list { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-2); }
   .value { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.35rem; }
-  .value-circle { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; color: var(--white); margin-bottom: 0.35rem; }
+  .value-circle { display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: 50%; color: var(--white); margin-bottom: 0.35rem; }
   .c-teal { background: var(--teal); }
   .c-sage-700 { background: var(--sage-700); }
   .c-sage { background: #8fa08f; }
   .c-coral { background: var(--coral); }
-  .value-name { font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 700; letter-spacing: 0.06em; margin: 0; }
+  .value-name { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; letter-spacing: 0.06em; margin: 0; }
   .value-line { font-size: var(--fs-small); margin: 0; max-width: 16ch; }
   @media (max-width: 640px) { .values-list { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: var(--space-3); } }
 </style>

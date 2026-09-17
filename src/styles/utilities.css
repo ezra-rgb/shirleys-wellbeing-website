@@ -23,3 +23,11 @@
 @media (max-width: 900px) { .hide-md { display: none !important; } }
 .hide-sm { display: initial; }
 @media (max-width: 640px) { .hide-sm { display: none !important; } }
+
+/* Side accents (handwritten statements beside a text block): beside the text on wide screens,
+   centred beneath it on narrow ones. Never hidden, because they are part of the visual system. */
+.accent-side { display: flex; align-items: center; gap: var(--space-3); }
+@media (max-width: 900px) {
+  .accent-side { justify-content: center; padding: var(--space-3) var(--gutter) 0; }
+  .accent-side .rule-v { display: none; }
+}
