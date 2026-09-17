@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import StoryBlock from '../components/StoryBlock.astro';
+import WhyPanel from '../components/WhyPanel.astro';
+import ValuesGrid from '../components/ValuesGrid.astro';
+import ApproachBlock from '../components/ApproachBlock.astro';
+import VisionContact from '../components/VisionContact.astro';
+import { about } from '../content/pages/about';
+---
+<BaseLayout title={about.meta.title} description={about.meta.description} footerTone="light" footerAccent={about.footerAccent}>
+  <Hero variant="about" title={about.hero.title} lead={about.hero.lead} body={about.hero.body} primaryCta={about.hero.cta} imageSlot="about-hero" accent={about.hero.accent} />
+  <section class="story-why" aria-label="Our story and why Shirley's exists">
+    <div class="container story-why-grid">
+      <StoryBlock heading={about.story.heading} subheading={about.story.subheading} paragraphs={about.story.paragraphs} pullLine={about.story.pullLine} />
+      <WhyPanel heading={about.whyPanel.heading} groups={about.whyPanel.groups} accent={about.whyPanel.accent} />
+    </div>
+  </section>
+  <section class="about-values" aria-label="Our values">
+    <div class="container"><ValuesGrid heading={about.values.heading} /></div>
+  </section>
+  <ApproachBlock heading={about.approach.heading} paragraphs={about.approach.paragraphs} steps={about.approach.steps} cta={about.approach.cta} imageAccent={about.approach.imageAccent} accent={about.approach.accent} />
+  <VisionContact vision={about.vision} stay={about.stayInTouch} />
+</BaseLayout>
+<style>
+  .story-why { padding-block: var(--space-section) var(--space-4); }
+  .story-why-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: var(--space-5); align-items: start; }
+  .about-values { padding-block: var(--space-2) var(--space-section); }
+  @media (max-width: 900px) { .story-why-grid { grid-template-columns: 1fr; gap: var(--space-4); } }
+</style>

@@ -1,0 +1,44 @@
+---
+/**
+ * Every button on the site is a link. Variants per the design system:
+ * primary (coral-700 fill), secondary (coral outline), secondary-dark (white fill on teal), text (underlined).
+ * `hiddenLabel` adds visually hidden context so repeated labels stay distinct for screen readers.
+ */
+import Icon from './Icon.astro';
+interface Props {
+  href: string;
+  label: string;
+  hiddenLabel?: string;
+  variant?: 'primary' | 'secondary' | 'secondary-dark' | 'text';
+  arrow?: boolean;
+  class?: string;
+  ariaCurrent?: 'page';
+}
+const { href, label, hiddenLabel, variant = 'primary', arrow = true, class: className = '', ariaCurrent } = Astro.props;
+const external = /^https?:/.test(href);
+---
+<a class={`btn btn-${variant} ${className}`} href={href} aria-current={ariaCurrent}
+   rel={external ? 'noopener' : undefined} target={external ? '_blank' : undefined}>
+  <span>{label}{hiddenLabel && <span class="visually-hidden"> {hiddenLabel}</span>}</span>
+  {arrow && <Icon name="arrow-right" size={16} strokeWidth={2} />}
+</a>
+<style>
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    min-height: 44px; padding: 0.7rem 1.4rem;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-sans); font-size: var(--fs-small); font-weight: 600; line-height: 1.2;
+    text-decoration: none; border: 1.5px solid transparent;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .btn-primary { background: var(--coral-700); color: var(--white); border-color: var(--coral-700); }
+  .btn-primary:hover { background: var(--coral-800); border-color: var(--coral-800); }
+  .btn-secondary { background: transparent; color: var(--coral-800); border-color: var(--coral-700); }
+  .btn-secondary:hover { background: var(--blush); }
+  .btn-secondary-dark { background: var(--white); color: var(--ink); border-color: var(--white); }
+  .btn-secondary-dark:hover { background: var(--cream); }
+  .btn-text { padding: 0.4rem 0; min-height: 44px; border: 0; border-radius: 6px; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+  .btn-text:hover { color: var(--coral-800); }
+  .btn:focus-visible { box-shadow: var(--focus-ring); outline: none; }
+  :global(.on-dark) .btn:focus-visible { box-shadow: var(--focus-ring-on-dark); }
+</style>

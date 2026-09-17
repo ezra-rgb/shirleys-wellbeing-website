@@ -1,0 +1,36 @@
+---
+/** The four ways in: MOVE, TALK, CONNECT, BE SUPPORTED. Data from src/content/routes. */
+import { getCollection } from 'astro:content';
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+interface Props { heading: string; ctaLabel: string; id?: string }
+const { heading, ctaLabel, id = 'ways-in' } = Astro.props;
+const routes = (await getCollection('routes')).sort((a, b) => a.data.order - b.data.order);
+---
+<section id={id} class="routes" aria-labelledby={`${id}-heading`}>
+  <h2 id={`${id}-heading`} class="visually-hidden">{heading}</h2>
+  <div class="container grid grid-4">
+    {routes.map((r) => (
+      <article class={`route-card tint-${r.data.tint}`}>
+        <Icon name={r.data.icon} size={44} class="route-icon" strokeWidth={1.5} />
+        <h3 class="route-title">{r.data.title}</h3>
+        <p class="route-summary">{r.data.summary}</p>
+        <Button href={r.data.launchHref} label={ctaLabel} hiddenLabel={`about ${r.data.title}`} variant="text" />
+      </article>
+    ))}
+  </div>
+</section>
+<style>
+  .routes { padding-block: var(--space-2) var(--space-section); background: var(--cream); }
+  .routes .grid { margin-top: calc(-1 * var(--space-3)); }
+  .route-card { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.5rem; padding: var(--space-4) var(--space-3) var(--space-3); border-radius: var(--radius-card); min-height: 100%; }
+  .route-icon { color: var(--teal); margin-bottom: 0.25rem; }
+  .route-title { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin: 0; }
+  .route-summary { font-size: var(--fs-small); margin: 0 0 0.25rem; max-width: 30ch; }
+  .route-card :global(.btn-text) { margin-top: auto; }
+  .tint-sage { background: var(--sage-200); }
+  .tint-blush { background: var(--blush); }
+  .tint-pale-blue { background: var(--pale-blue); }
+  .tint-gold { background: var(--gold); }
+  @media (max-width: 900px) { .routes .grid { margin-top: 0; } }
+</style>

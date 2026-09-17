@@ -1,0 +1,18 @@
+---
+/** "Why Shirley's exists" on Home, with the approved location line from site config. */
+import { site } from '../config/site';
+import Button from './Button.astro';
+interface Props { heading: string; paragraphs: string[]; cta: { label: string; href: string }; id?: string }
+const { heading, paragraphs, cta, id = 'why' } = Astro.props;
+---
+<div class="why" id={id}>
+  <h2>{heading}</h2>
+  {paragraphs.map((p) => <p>{p}</p>)}
+  {site.flags.showLocationLine && <p class="why-location">{site.location.line}</p>}
+  <div class="why-cta"><Button href={cta.href} label={cta.label} variant="primary" /></div>
+</div>
+<style>
+  .why p { max-width: 52ch; }
+  .why-location { font-weight: 600; color: var(--teal); }
+  .why-cta { margin-top: var(--space-3); }
+</style>

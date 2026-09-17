@@ -1,0 +1,25 @@
+---
+/** About: teal band with the long-term vision and "Let's stay in touch". */
+import Button from './Button.astro';
+import ContactBlock from './ContactBlock.astro';
+interface Props { vision: { heading: string; paragraphs: string[]; cta: { label: string; href: string } }; stay: { heading: string; cta: { label: string; href: string }; accent?: string }; id?: string }
+const { vision, stay, id = 'vision' } = Astro.props;
+---
+<section id={id} class="vision on-dark" aria-labelledby={`${id}-heading`}>
+  <div class="container vision-grid">
+    <div class="vision-text">
+      <h2 id={`${id}-heading`}>{vision.heading}</h2>
+      {vision.paragraphs.map((p) => <p class="small">{p}</p>)}
+      <div class="vision-cta"><Button href={vision.cta.href} label={vision.cta.label} variant="primary" /></div>
+    </div>
+    <span class="rule-v hide-md"></span>
+    <ContactBlock mode="dark" heading={stay.heading} cta={stay.cta} accent={stay.accent} id="stay-in-touch" />
+  </div>
+</section>
+<style>
+  .vision { background: var(--teal); padding-block: var(--space-section); }
+  .vision-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: var(--space-5); }
+  .vision-text p { max-width: 44ch; }
+  .vision-cta { margin-top: var(--space-3); }
+  @media (max-width: 900px) { .vision-grid { grid-template-columns: 1fr; gap: var(--space-4); } }
+</style>

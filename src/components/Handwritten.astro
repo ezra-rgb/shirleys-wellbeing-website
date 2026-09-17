@@ -1,0 +1,36 @@
+---
+import Heart from './Heart.astro';
+/**
+ * Handwritten accent phrase. Decorative brand language only: always aria-hidden,
+ * never used for information. Text is passed in; lines break on " " when `lines` is set.
+ */
+interface Props {
+  text: string;
+  heart?: boolean;
+  tone?: 'ink' | 'white' | 'coral';
+  size?: 'sm' | 'md' | 'lg';
+  rotate?: number;
+  align?: 'left' | 'center' | 'right';
+  class?: string;
+}
+const { text, heart = true, tone = 'ink', size = 'md', rotate = -4, align = 'center', class: className = '' } = Astro.props;
+---
+<div class={`hw hw-${tone} hw-${size} hw-${align} ${className}`} aria-hidden="true" style={`--rot:${rotate}deg`}>
+  <span class="hw-text">{text}</span>
+  {heart && <Heart class="hw-heart" size={size === 'lg' ? 26 : size === 'sm' ? 16 : 20} />}
+</div>
+<style>
+  .hw { display: inline-flex; flex-direction: column; gap: 0.15em; transform: rotate(var(--rot)); font-family: var(--font-script); font-weight: 500; line-height: 1.05; pointer-events: none; user-select: none; }
+  .hw-left { align-items: flex-start; text-align: left; }
+  .hw-center { align-items: center; text-align: center; }
+  .hw-right { align-items: flex-end; text-align: right; }
+  .hw-sm { font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem); }
+  .hw-md { font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2.1rem); }
+  .hw-lg { font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.8rem); }
+  .hw-ink { color: var(--ink); }
+  .hw-white { color: var(--white); }
+  .hw-coral { color: var(--coral-700); }
+  .hw-text { max-width: 9em; }
+  .hw-white :global(.hw-heart) { color: var(--white); }
+  .hw-ink :global(.hw-heart), .hw-coral :global(.hw-heart) { color: var(--coral); }
+</style>

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import AudienceCards from '../components/AudienceCards.astro';
+import ClosingBlock from '../components/ClosingBlock.astro';
+import { letsTalk } from '../content/pages/lets-talk';
+---
+<BaseLayout title={letsTalk.meta.title} description={letsTalk.meta.description} footerTone="dark" footerAccent={letsTalk.footerAccent}>
+  <Hero variant="talk" title={letsTalk.hero.title} lead={letsTalk.hero.lead} body={letsTalk.hero.body} imageSlot="lets-talk-hero" accent={letsTalk.hero.accent} />
+  <section class="get-in-touch" aria-label="Get in touch">
+    <div class="container">
+      <ContactBlock mode="panel" id="get-in-touch" heading={letsTalk.getInTouch.heading} paragraph={letsTalk.getInTouch.paragraph} accent={letsTalk.getInTouch.accent} showSafety />
+    </div>
+  </section>
+  <AudienceCards heading={letsTalk.who.heading} lead={letsTalk.who.lead} />
+  <ClosingBlock heading={letsTalk.together.heading} paragraph={letsTalk.together.paragraph} cta={letsTalk.together.cta} accent={letsTalk.together.accent} />
+</BaseLayout>
+<style>
+  .get-in-touch { padding-block: var(--space-4) 0; }
+</style>

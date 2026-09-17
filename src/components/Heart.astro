@@ -1,0 +1,10 @@
+---
+/** Small outline heart accent. Decorative only. */
+interface Props { size?: number; class?: string; filled?: boolean }
+const { size = 18, class: className = '', filled = false } = Astro.props;
+---
+<svg class={`heart ${className}`} width={size} height={size} viewBox="0 0 24 24" aria-hidden="true" focusable="false"
+  fill={filled ? 'currentColor' : 'none'} stroke="currentColor" stroke-width="1.75" stroke-linejoin="round">
+  <path d="M12 20.5c-.6-.5-8-6.3-8-11.4A4.6 4.6 0 0 1 8.6 4.5c1.6 0 2.8.8 3.4 1.6.6-.8 1.8-1.6 3.4-1.6A4.6 4.6 0 0 1 20 9.1c0 5.1-7.4 10.9-8 11.4Z"/>
+</svg>
+<style>.heart { display: inline-block; flex: none; }</style>

@@ -1,0 +1,34 @@
+---
+/** About: image left with handwritten overlay, approach text and step chain centre, accent right. */
+import ImageSlot from './ImageSlot.astro';
+import Handwritten from './Handwritten.astro';
+import StepChain from './StepChain.astro';
+import Button from './Button.astro';
+interface Props { heading: string; paragraphs: string[]; steps: string[]; cta: { label: string; href: string }; imageAccent?: string; accent?: string; id?: string }
+const { heading, paragraphs, steps, cta, imageAccent, accent, id = 'approach' } = Astro.props;
+---
+<section id={id} class="approach" aria-labelledby={`${id}-heading`}>
+  <div class="approach-media">
+    <ImageSlot name="about-approach" fill>
+      {imageAccent && <div class="approach-image-accent"><Handwritten text={imageAccent} tone="white" size="md" rotate={-8} align="left" /></div>}
+    </ImageSlot>
+  </div>
+  <div class="approach-text">
+    <h2 id={`${id}-heading`}>{heading}</h2>
+    {paragraphs.map((p) => <p class="small">{p}</p>)}
+    <StepChain steps={steps} />
+    <div class="approach-cta"><Button href={cta.href} label={cta.label} variant="secondary" /></div>
+  </div>
+  {accent && <div class="approach-accent hide-md"><span class="rule-v"></span><Handwritten text={accent} size="md" rotate={-8} /></div>}
+</section>
+<style>
+  .approach { display: grid; grid-template-columns: 45fr 40fr 15fr; background: var(--band); }
+  .approach-media { position: relative; }
+  .approach-image-accent { position: absolute; left: 6%; top: 12%; }
+  .supplied .approach-image-accent { text-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+  .approach-text { padding: var(--space-5) clamp(1.5rem, 1rem + 2vw, 3rem); }
+  .approach-text p { max-width: 44ch; }
+  .approach-cta { margin-top: var(--space-2); }
+  .approach-accent { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-5) var(--gutter) var(--space-5) 0; }
+  @media (max-width: 900px) { .approach { grid-template-columns: 1fr; } .approach-text { padding-inline: var(--gutter); } }
+</style>

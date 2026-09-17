@@ -1,0 +1,67 @@
+---
+/**
+ * Contact details. One source of truth (site.contact). `mode`:
+ *  - panel: pale panel with heading, paragraph, rows, optional safety line, accent (Let's Talk)
+ *  - dark: rows and a button inside a teal band (About)
+ */
+import { site } from '../config/site';
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+import Handwritten from './Handwritten.astro';
+interface Props { mode?: 'panel' | 'dark'; heading: string; paragraph?: string; cta?: { label: string; href: string }; accent?: string; id?: string; showSafety?: boolean }
+const { mode = 'panel', heading, paragraph, cta, accent, id, showSafety = false } = Astro.props;
+const { contact } = site;
+---
+<div id={id} class={`contact contact-${mode} ${mode === 'dark' ? 'on-dark' : ''}`}>
+  <div class="contact-main">
+    <h2>{heading}</h2>
+    {paragraph && <p>{paragraph}</p>}
+    <ul class="contact-rows">
+      <li class="row">
+        <span class="row-icon"><Icon name="phone" size={22} strokeWidth={1.6} /></span>
+        <span class="row-text">{mode === 'panel' && <span class="row-label">Phone</span>}<a href={contact.phoneHref}>{contact.phoneDisplay}</a></span>
+      </li>
+      <li class="row">
+        <span class="row-icon"><Icon name="mail" size={22} strokeWidth={1.6} /></span>
+        <span class="row-text">{mode === 'panel' && <span class="row-label">Email</span>}<a href={contact.emailHref}>{contact.email}</a></span>
+      </li>
+    </ul>
+    {showSafety && site.flags.showSafetyLine && (
+      <p class="safety small"><strong>{site.safety.line}</strong> {site.safety.detail}</p>
+    )}
+    {cta && <div class="contact-cta"><Button href={cta.href} label={cta.label} variant="primary" /></div>}
+  </div>
+  {accent && (
+    <div class="contact-accent hide-md">
+      {mode === 'panel' ? (
+        <>
+          <span class="rule-v"></span>
+          <div class="brush-wrap"><div class="brush"></div><Handwritten text={accent} size="md" rotate={-8} /></div>
+        </>
+      ) : (
+        <Handwritten text={accent} tone="white" size="md" rotate={-8} />
+      )}
+    </div>
+  )}
+</div>
+<style>
+  .contact-panel { display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-4); background: var(--pale-blue-100); border-radius: var(--radius-panel); padding: var(--space-4) var(--space-4); }
+  .contact-dark { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--space-3); align-items: center; }
+  .contact-dark .contact-accent { max-width: 11rem; }
+  .contact-rows { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; margin-top: var(--space-2); }
+  .row { display: flex; align-items: center; gap: 0.85rem; }
+  .row-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; background: var(--teal); color: var(--white); flex: none; }
+  .contact-dark .row-icon { width: 30px; height: 30px; background: var(--white); color: var(--teal); }
+  .row-text { display: flex; flex-direction: column; line-height: 1.3; }
+  .row-label { font-size: var(--fs-small); font-weight: 600; }
+  .row a { color: inherit; font-size: 1.125rem; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; overflow-wrap: anywhere; }
+  .contact-dark .row a { font-size: 1rem; }
+  .row a:hover { text-decoration: underline; }
+  .safety { margin-top: var(--space-3); max-width: 52ch; color: var(--text-muted); }
+  .contact-cta { margin-top: var(--space-3); }
+  .contact-accent { display: flex; align-items: center; gap: var(--space-3); justify-content: center; }
+  .brush-wrap { position: relative; width: 13rem; height: 12rem; display: flex; align-items: center; justify-content: center; }
+  .brush { position: absolute; inset: 0; background: var(--blush); border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%; transform: rotate(8deg); }
+  .brush-wrap :global(.hw) { position: relative; }
+  @media (max-width: 900px) { .contact-panel, .contact-dark { grid-template-columns: 1fr; } }
+</style>

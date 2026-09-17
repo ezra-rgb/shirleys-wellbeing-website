@@ -1,0 +1,26 @@
+{
+  "name": "shirleys-wellbeing-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shirley's Wellbeing CIC public website. Static, three-page launch, future-ready.",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "check": "node scripts/check-content.mjs && astro check",
+    "prebuild": "node scripts/check-content.mjs && node scripts/og-image.mjs",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "@fontsource-variable/caveat": "^5.1.0",
+    "@fontsource-variable/inter": "^5.1.0",
+    "@fontsource-variable/playfair-display": "^5.1.0",
+    "astro": "^5.5.0",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.7.3"
+  }
+}

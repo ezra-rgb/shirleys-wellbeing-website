@@ -1,0 +1,16 @@
+---
+/** Page section with a background tone and the standard vertical rhythm. */
+interface Props { id?: string; tone?: 'cream' | 'band' | 'teal' | 'white' | 'none'; class?: string; padded?: boolean; ariaLabelledby?: string }
+const { id, tone = 'cream', class: className = '', padded = true, ariaLabelledby } = Astro.props;
+---
+<section id={id} class={`section tone-${tone} ${padded ? 'padded' : ''} ${tone === 'teal' ? 'on-dark' : ''} ${className}`} aria-labelledby={ariaLabelledby}>
+  <slot />
+</section>
+<style>
+  .section { position: relative; }
+  .padded { padding-block: var(--space-section); }
+  .tone-cream { background: var(--cream); }
+  .tone-band { background: var(--band); }
+  .tone-teal { background: var(--teal); color: var(--white); }
+  .tone-white { background: var(--white); }
+</style>

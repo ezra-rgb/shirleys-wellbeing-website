@@ -1,0 +1,10 @@
+---
+/** Programme status label. Text, never colour alone. */
+import { statusLabels } from '../content.config';
+interface Props { status: keyof typeof statusLabels; class?: string }
+const { status, class: className = '' } = Astro.props;
+---
+<span class={`badge ${className}`}>{statusLabels[status]}</span>
+<style>
+  .badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: var(--radius-pill); background: var(--cream); color: var(--ink); font-family: var(--font-sans); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid rgba(22,55,68,0.15); }
+</style>

@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import EntryRoutes from '../components/EntryRoutes.astro';
+import WhyBlock from '../components/WhyBlock.astro';
+import ValuesGrid from '../components/ValuesGrid.astro';
+import ProgrammeGrid from '../components/ProgrammeGrid.astro';
+import PartnerStatement from '../components/PartnerStatement.astro';
+import { home } from '../content/pages/home';
+---
+<BaseLayout title={home.meta.title} description={home.meta.description} footerTone="light" footerAccent={home.footerAccent}>
+  <Hero variant="home" eyebrow={home.hero.eyebrow} title={home.hero.title} lead={home.hero.lead} body={home.hero.body}
+        primaryCta={home.hero.primaryCta} secondaryCta={home.hero.secondaryCta} imageSlot="home-hero" accent={home.hero.accent} />
+  <EntryRoutes heading={home.waysIn.heading} ctaLabel={home.waysIn.ctaLabel} />
+  <section class="why-values" aria-label="Why Shirley's exists and our values">
+    <div class="container why-values-grid">
+      <WhyBlock heading={home.why.heading} paragraphs={home.why.paragraphs} cta={home.why.cta} />
+      <span class="rule-v hide-md"></span>
+      <ValuesGrid heading={home.values.heading} />
+    </div>
+  </section>
+  <ProgrammeGrid heading={home.building.heading} intro={home.building.intro} viewAll={home.building.viewAll} />
+  <PartnerStatement heading={home.partner.heading} paragraph={home.partner.paragraph} cta={home.partner.cta} statement={home.statement} />
+</BaseLayout>
+<style>
+  .why-values { padding-block: var(--space-2) var(--space-section); background: var(--cream); }
+  .why-values-grid { display: grid; grid-template-columns: 1fr auto 1.1fr; gap: var(--space-5); align-items: start; }
+  @media (max-width: 900px) { .why-values-grid { grid-template-columns: 1fr; gap: var(--space-4); } }
+</style>

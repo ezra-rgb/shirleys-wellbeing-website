@@ -1,0 +1,8 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import { notFoundPage as p } from '../content/pages/placeholders';
+---
+<BaseLayout title={p.meta.title} description={p.meta.description} noindex>
+  <Hero variant="simple" title={p.title} lead={p.lead} body={p.body} primaryCta={p.primaryCta} secondaryCta={p.secondaryCta} />
+</BaseLayout>

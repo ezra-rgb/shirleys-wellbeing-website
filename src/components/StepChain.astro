@@ -1,0 +1,13 @@
+---
+/** Ordered steps rendered as a chain (Start local, Build trust, Listen...). Arrows are CSS, not characters. */
+interface Props { steps: string[]; label?: string }
+const { steps, label = 'How we work, step by step' } = Astro.props;
+---
+<ol class="chain" aria-label={label}>
+  {steps.map((s) => <li class="chain-step">{s}</li>)}
+</ol>
+<style>
+  .chain { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem 0.25rem; align-items: center; margin: var(--space-2) 0; }
+  .chain-step { font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); display: inline-flex; align-items: center; }
+  .chain-step + .chain-step::before { content: ''; display: inline-block; width: 0.5rem; height: 0.5rem; border-top: 1.5px solid var(--coral); border-right: 1.5px solid var(--coral); transform: rotate(45deg); margin: 0 0.6rem 0 0.35rem; }
+</style>

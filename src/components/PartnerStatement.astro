@@ -1,0 +1,70 @@
+---
+/**
+ * Full-width band: teal "Partner with us" panel beside an organisational statement.
+ * The statement is NOT a testimonial. `variant="testimonial"` exists for a future
+ * consented participant quote and refuses to render without consentConfirmed.
+ */
+import Button from './Button.astro';
+import Handwritten from './Handwritten.astro';
+import ImageSlot from './ImageSlot.astro';
+interface Props {
+  id?: string;
+  heading: string;
+  paragraph: string;
+  cta: { label: string; href: string };
+  statement: { text: string; attribution: string; accent?: string };
+  variant?: 'statement' | 'testimonial';
+  consentConfirmed?: boolean;
+}
+const { id = 'for-retailers', heading, paragraph, cta, statement, variant = 'statement', consentConfirmed = false } = Astro.props;
+if (variant === 'testimonial' && !consentConfirmed) throw new Error('A testimonial cannot render without recorded consent.');
+---
+<section id={id} class="partner-band" aria-labelledby={`${id}-heading`}>
+  <div class="partner on-dark">
+    <div class="partner-inner">
+      <h2 id={`${id}-heading`}>{heading}</h2>
+      <p>{paragraph}</p>
+      <div class="partner-cta"><Button href={cta.href} label={cta.label} variant="primary" /></div>
+    </div>
+  </div>
+  <div class="statement">
+    <div class="statement-text">
+      {variant === 'testimonial' ? (
+        <blockquote class="quote"><p>{statement.text}</p><footer class="attr">{statement.attribution}</footer></blockquote>
+      ) : (
+        <div class="quote" role="note">
+          <p class="statement-p">{statement.text}</p>
+          <p class="attr">{statement.attribution}</p>
+        </div>
+      )}
+    </div>
+    <div class="statement-media">
+      <ImageSlot name="home-story" fill>
+        <div class="statement-wash"></div>
+        {statement.accent && <div class="statement-accent"><Handwritten text={statement.accent} size="md" rotate={-8} /></div>}
+      </ImageSlot>
+    </div>
+  </div>
+</section>
+<style>
+  .partner-band { display: grid; grid-template-columns: 1fr 1fr; }
+  .partner { background: var(--teal); display: flex; justify-content: flex-end; }
+  .partner-inner { width: min(100%, calc(var(--container) / 2)); padding: var(--space-5) clamp(1.5rem, 1rem + 3vw, 4rem) var(--space-5) var(--gutter); }
+  .partner-cta { margin-top: var(--space-3); }
+  .statement { display: grid; grid-template-columns: 1.4fr 1fr; background: var(--cream-deep); }
+  .statement-text { padding: var(--space-5) clamp(1.5rem, 1rem + 3vw, 3rem); display: flex; align-items: center; }
+  .statement-p { font-size: 1.125rem; margin-bottom: 0.75rem; }
+  .quote { position: relative; margin: 0; }
+  blockquote.quote::before { content: '\201C'; position: absolute; left: -0.6em; top: -0.55em; font-family: var(--font-serif); font-size: 3.5rem; line-height: 1; color: var(--coral); }
+  .attr { font-size: var(--fs-small); font-weight: 600; margin: 0; }
+  .statement-media { position: relative; min-height: 100%; }
+  .statement-wash { position: absolute; inset: 0; background: radial-gradient(circle at 60% 55%, rgba(241,221,213,0.85) 0%, rgba(241,221,213,0.4) 45%, rgba(241,221,213,0) 75%); }
+  .statement-accent { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  @media (max-width: 900px) {
+    .partner-band { grid-template-columns: 1fr; }
+    .partner { justify-content: flex-start; }
+    .partner-inner { width: min(100%, var(--container)); padding-inline: var(--gutter); margin-inline: auto; }
+    .statement { grid-template-columns: 1fr; }
+    .statement-text { padding-inline: var(--gutter); }
+  }
+</style>

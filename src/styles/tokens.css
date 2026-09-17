@@ -1,0 +1,63 @@
+/* Shirley's Wellbeing CIC design tokens.
+   The only place a colour, font, radius or spacing value is named.
+   Palette from the Brand Pack Visual Reference V1; the coral-700 and coral-800
+   variants exist for WCAG AA text and button contrast (approved decision OD11). */
+:root {
+  /* Colour */
+  --ink: #163744;
+  --teal: #375865;
+  --teal-900: #2a4652;
+  --cream: #f8f7f3;
+  --cream-deep: #f1f0ea;
+  --band: #eff0eb;
+  --coral: #d9795c;
+  --coral-700: #ba5634;
+  --coral-800: #a84d2e;
+  --sage: #a9b29f;
+  --sage-200: #e1e5db;
+  --sage-700: #6b7b5e;
+  --blush: #f1ddd5;
+  --blush-200: #f6e8e2;
+  --pale-blue: #e4ecee;
+  --pale-blue-100: #edf2f3;
+  --gold: #f4e8cf;
+  --gold-700: #d9a441;
+  --white: #ffffff;
+  --text: var(--ink);
+  --text-muted: #4a5d66;
+  --rule: rgba(22, 55, 68, 0.14);
+
+  /* Type */
+  --font-serif: 'Playfair Display Variable', 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-script: 'Caveat Variable', 'Caveat', 'Segoe Script', 'Bradley Hand', cursive;
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  --fs-h1: clamp(2.75rem, 2rem + 3.2vw, 4.5rem);
+  --fs-h2: clamp(1.875rem, 1.5rem + 1.4vw, 2.5rem);
+  --fs-h3: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+  --fs-lead: clamp(1.1875rem, 1.05rem + 0.5vw, 1.375rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-label: 0.75rem;
+  --fs-script: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+
+  /* Space */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --space-section: clamp(3rem, 2rem + 4vw, 6rem);
+  --gutter: clamp(1rem, 0.5rem + 2vw, 1.5rem);
+  --container: 75rem;
+
+  /* Shape */
+  --radius-panel: 24px;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px var(--ink);
+  --focus-ring-on-dark: 0 0 0 3px var(--white);
+}

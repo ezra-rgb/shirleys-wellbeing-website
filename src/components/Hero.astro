@@ -1,0 +1,69 @@
+---
+/**
+ * Page hero. `variant` home | about | talk use the text-left, full-bleed-image-right composition
+ * from the mock-ups; `simple` has no image (placeholder pages and 404).
+ */
+import Button from './Button.astro';
+import Handwritten from './Handwritten.astro';
+import ImageSlot from './ImageSlot.astro';
+import type { ImageSlotName } from '../config/images';
+type Part = { text: string; script?: boolean; br?: boolean };
+interface Props {
+  variant?: 'home' | 'about' | 'talk' | 'simple';
+  eyebrow?: string;
+  title: Part[];
+  lead?: string;
+  body?: string[];
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+  imageSlot?: ImageSlotName;
+  accent?: string;
+}
+const { variant = 'home', eyebrow, title, lead, body = [], primaryCta, secondaryCta, imageSlot, accent } = Astro.props;
+---
+<section class={`hero hero-${variant}`}>
+  <div class="hero-text">
+    {eyebrow && <p class="label hero-eyebrow">{eyebrow}</p>}
+    <h1 class="hero-title">
+      {title.map((p) => (<>{p.script ? <span class="script">{p.text}</span> : <span>{p.text}</span>}{p.br && <br />}</>))}
+    </h1>
+    {lead && <p class="lead">{lead}</p>}
+    {body.map((para) => <p class="hero-body">{para}</p>)}
+    {(primaryCta || secondaryCta) && (
+      <div class="hero-ctas">
+        {primaryCta && <Button href={primaryCta.href} label={primaryCta.label} variant="primary" />}
+        {secondaryCta && <Button href={secondaryCta.href} label={secondaryCta.label} variant="secondary" />}
+      </div>
+    )}
+    {variant === 'simple' && accent && <div class="simple-accent"><Handwritten text={accent} size="lg" rotate={-6} /></div>}
+  </div>
+  {variant !== 'simple' && imageSlot && (
+    <div class="hero-media">
+      <ImageSlot name={imageSlot} priority fill />
+      {accent && <div class="hero-accent hide-sm"><Handwritten text={accent} size="lg" rotate={-6} /></div>}
+    </div>
+  )}
+</section>
+<style>
+  .hero { display: grid; grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, calc(var(--container) / 2)) minmax(0, calc(var(--container) / 2)) minmax(var(--gutter), 1fr); background: var(--cream); }
+  .hero-text { grid-column: 2; padding: clamp(2.5rem, 2rem + 3vw, 5rem) clamp(1.5rem, 1rem + 3vw, 4rem) clamp(2.5rem, 2rem + 3vw, 5rem) 0; display: flex; flex-direction: column; justify-content: center; }
+  .hero-media { grid-column: 3 / 5; position: relative; min-height: 100%; }
+  .hero-media :global(.slot) { height: 100%; }
+  .hero-title { margin-bottom: 0.75rem; }
+  .hero-title .script { font-size: 1.12em; line-height: 0.9; }
+  .hero-eyebrow { margin-bottom: 1rem; }
+  .hero-body { max-width: 46ch; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+  .hero-accent { position: absolute; top: 12%; right: 6%; max-width: 30%; }
+  .hero-simple { grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, var(--container)) minmax(var(--gutter), 1fr); }
+  .hero-simple .hero-text { grid-column: 2; padding-right: 0; max-width: 60rem; position: relative; }
+  .simple-accent { position: absolute; right: 0; top: clamp(1rem, 4vw, 3rem); }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: minmax(var(--gutter), 1fr) minmax(0, var(--container)) minmax(var(--gutter), 1fr); }
+    .hero-media { grid-column: 1 / -1; grid-row: 1; min-height: 0; }
+    .hero-media :global(.slot) { height: auto; }
+    .hero-text { grid-column: 2; grid-row: 2; padding-right: 0; }
+    .simple-accent { position: static; margin-top: var(--space-3); }
+  }
+  @media (max-width: 480px) { .hero-ctas :global(.btn) { width: 100%; } }
+</style>

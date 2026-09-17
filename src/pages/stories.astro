@@ -1,0 +1,9 @@
+---
+/** Minimal launch treatment. Full Stories area is future content; see README. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import { storiesPage as p } from '../content/pages/placeholders';
+---
+<BaseLayout title={p.meta.title} description={p.meta.description} footerTone="light" footerAccent="See the person first.">
+  <Hero variant="simple" eyebrow={p.eyebrow} title={p.title} lead={p.lead} body={p.body} primaryCta={p.cta} accent={p.accent} />
+</BaseLayout>

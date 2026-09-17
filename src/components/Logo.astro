@@ -1,0 +1,37 @@
+---
+/**
+ * Wordmark. When the final logo files exist at src/assets/brand/logo.svg (dark)
+ * and src/assets/brand/logo-white.svg they are used automatically.
+ * Until then a clearly temporary script-font wordmark stands in (decision OD3).
+ */
+import { site } from '../config/site';
+import Heart from './Heart.astro';
+import type { ImageMetadata } from 'astro';
+interface Props { tone?: 'dark' | 'white'; class?: string; link?: boolean }
+const { tone = 'dark', class: className = '', link = true } = Astro.props;
+const files = import.meta.glob<{ default: ImageMetadata }>('/src/assets/brand/logo*.svg', { eager: true });
+const dark = Object.entries(files).find(([p]) => p.endsWith('/logo.svg'))?.[1].default;
+const white = Object.entries(files).find(([p]) => p.endsWith('/logo-white.svg'))?.[1].default;
+const asset = tone === 'white' ? (white ?? dark) : dark;
+const Tag = link ? 'a' : 'div';
+---
+<Tag class={`logo logo-${tone} ${className}`} href={link ? '/' : undefined} aria-label={link ? `${site.name}, home` : undefined}>
+  {asset ? (
+    <img src={asset.src} width={asset.width} height={asset.height} alt={link ? '' : site.name} class="logo-img" />
+  ) : (
+    <span class="wordmark" data-placeholder="logo">
+      <span class="wordmark-name">Shirley's<Heart class="wordmark-heart" size={14} filled /></span>
+      <span class="wordmark-sub">Wellbeing CIC</span>
+      <span class="visually-hidden">{site.name}</span>
+    </span>
+  )}
+</Tag>
+<style>
+  .logo { display: inline-flex; text-decoration: none; color: var(--ink); line-height: 1; border-radius: 8px; }
+  .logo-white { color: var(--white); }
+  .logo-img { height: 56px; width: auto; }
+  .wordmark { display: inline-flex; flex-direction: column; align-items: center; gap: 0.1rem; }
+  .wordmark-name { position: relative; font-family: var(--font-script); font-weight: 700; font-size: 2.1rem; line-height: 1; letter-spacing: -0.01em; padding-right: 0.15em; }
+  .wordmark-name :global(.wordmark-heart) { position: absolute; top: -0.15em; right: -0.35em; color: var(--coral); }
+  .wordmark-sub { font-family: var(--font-sans); font-size: 0.55rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; }
+</style>
