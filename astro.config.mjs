@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Site URL: replace with the confirmed domain once DNS is set up (open decision OD10).
+// Site URL: www is the canonical host; Render redirects the apex to it (OD10 resolved).
 export default defineConfig({
-  site: 'https://shirleyswellbeingcic.co.uk',
+  site: 'https://www.shirleyswellbeingcic.co.uk',
   output: 'static',
   trailingSlash: 'never',
   build: { format: 'file' },
