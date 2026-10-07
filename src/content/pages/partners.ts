@@ -21,7 +21,7 @@ export const partners = {
     heading: 'What we offer',
     items: [
       { title: 'Alongside your support', text: 'A partner to employers, alongside the support you already offer. We aim to complement it, not duplicate it.' },
-      { title: 'Managers as well as staff', text: 'Support for managers and supervisors, who are often both targets and the people expected to help.' },
+      { title: 'Managers as well as staff', text: 'Support for managers and supervisors, who are often both targets and the people expected to help. Beyond the Tills has a separate group for managers.', link: { label: 'About Beyond the Tills', href: '/beyond-the-tills' } },
       { title: 'A route to specialist help', text: 'When someone needs more, we help them find it, including NHS Talking Therapies and their GP.' },
       { title: 'Measured honestly', text: "We track wellbeing, confidence and help-seeking before and after, and we'll publish what we find." },
     ],

@@ -20,8 +20,8 @@ export const programmes = {
       photo: 'programme-beyond-the-tills' as const,
       status: 'In development',
       title: 'Beyond the Tills',
-      text: "A group programme of around six weeks for people who've experienced abuse or violence at work. It's about rebuilding confidence, finding steady ground and knowing where to turn.",
-      cta: { label: 'Register your interest', hidden: 'in Beyond the Tills', href: '/lets-talk#get-in-touch' },
+      text: "A 12-week wellbeing and recovery programme for retail workers who are still feeling the effects of violence or abuse at work. Weekly group sessions, practical workshops and six 1:1 coaching sessions, with separate groups for staff and managers. You do not have to tell us what happened.",
+      cta: { label: 'Find out about Beyond the Tills', hidden: '', href: '/beyond-the-tills' },
     },
     {
       id: 'programme-move',

@@ -5,7 +5,7 @@ import Expectations from '../components/Expectations.astro';
 import { hasPhoto } from '../lib/photos';
 import { home } from '../content/pages/home';
 import { site } from '../config/site';
-const { hero, problem, howWeHelp, programmesCta, employers } = home;
+const { hero, problem, howWeHelp, featured, programmesCta, employers } = home;
 const showQuote = problem.quote.consentConfirmed && problem.quote.text !== '';
 const showEvidencePhoto = hasPhoto('home-evidence');
 ---
@@ -69,6 +69,7 @@ const showEvidencePhoto = hasPhoto('home-evidence');
           </li>
         ))}
       </ul>
+      <p class="featured">{featured.text} <a class="text-link" href={featured.link.href}>{featured.link.label}</a></p>
       <Expectations />
     </div>
   </section>
@@ -122,6 +123,7 @@ const showEvidencePhoto = hasPhoto('home-evidence');
   .route-title { font-size: 1.1875rem; letter-spacing: 0.01em; margin-bottom: 0.9rem; }
   .route-link { margin-top: 0.75rem; font-size: 1rem; }
 
+  .featured { margin-top: var(--space-4); max-width: 46rem; font-size: 1.0625rem; color: var(--head); }
   .programmes-link { padding-block: var(--space-5); }
 
   .employers h2 { margin-bottom: 0; }

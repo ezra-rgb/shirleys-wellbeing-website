@@ -23,7 +23,7 @@ const { hero, items, closing } = programmes;
             <p class="eyebrow programme-status">{p.status}</p>
             <h2 id={`${p.id}-title`} class="programme-title">{p.title}</h2>
             <p class="programme-text">{p.text}</p>
-            <a class="button button-teal" href={p.cta.href}>{p.cta.label}<span class="visually-hidden"> {p.cta.hidden}</span></a>
+            <a class="button button-teal" href={p.cta.href}>{p.cta.label}{p.cta.hidden && <span class="visually-hidden"> {p.cta.hidden}</span>}</a>
           </div>
         </article>
       ))}

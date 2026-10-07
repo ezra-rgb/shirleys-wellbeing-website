@@ -1,0 +1,249 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Photo from '../components/Photo.astro';
+import { btt } from '../content/pages/beyond-the-tills';
+const { hero, problem, stats, research, what, who, strands, isNot, safety, outcomes, cta } = btt;
+---
+<BaseLayout title={btt.meta.title} description={btt.meta.description}>
+  <!-- Dark hero -->
+  <section class="hero tone-dark" aria-labelledby="btt-title">
+    <div class="container">
+      <p class="eyebrow">{hero.eyebrow} <span class="status">· {hero.status}</span></p>
+      <h1 id="btt-title" class="hero-title">{hero.title}</h1>
+      <p class="lead hero-lead">{hero.lead}</p>
+      <p class="hero-sub">{hero.sub}</p>
+      <p class="promise">{hero.promise}</p>
+      <div class="button-row">
+        <a class="button button-amber" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
+        <a class="button button-ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dark problem and evidence -->
+  <section class="problem tone-panel section" aria-labelledby="problem-title">
+    <div class="container">
+      <div class="split">
+        <div>
+          <h2 id="problem-title">{problem.heading}</h2>
+          <p class="lead">{problem.lead}</p>
+        </div>
+        <div>
+          <p class="areas-intro">{problem.intro}</p>
+          <ul class="areas">{problem.areas.map((a) => <li>{a}</li>)}</ul>
+        </div>
+      </div>
+
+      <h2 class="stats-heading" id="stats-title">{stats.heading}</h2>
+      {stats.groups.map((g) => (
+        <div class="stat-group" aria-label={g.label}>
+          <ul class="stats">
+            {g.items.map((s) => (
+              <li class="stat">
+                <p class="stat-figure">{s.figure}</p>
+                <p class="stat-text">{s.text}</p>
+              </li>
+            ))}
+          </ul>
+          <p class="caption stat-source"><strong>{g.label}.</strong> {g.href ? <a href={g.href} rel="noopener">{g.note}</a> : g.note}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Hard edge into light: research framing -->
+  <section class="research tone-light section" aria-labelledby="research-title">
+    <div class="container split split-narrow-wide">
+      <h2 id="research-title">{research.heading}</h2>
+      <div>
+        {research.paragraphs.map((p) => <p>{p}</p>)}
+        <p class="design-heading"><strong>{research.designHeading}</strong></p>
+        <ul class="ticks">{research.design.map((d) => <li>{d}</li>)}</ul>
+        <p class="caption research-source">Sources:</p>
+        <ul class="sources caption">
+          {research.sources.map((src) => <li><a href={src.href} rel="noopener">{src.label}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- What happens -->
+  <section id="what-happens" class="what tone-alt section" aria-labelledby="what-title">
+    <div class="container">
+      <h2 id="what-title">{what.heading}</h2>
+      <p class="lead measure-wide">{what.lead}</p>
+      <Photo slot="programme-beyond-the-tills" class="what-photo" />
+      <ul class="cards">
+        {what.cards.map((c, i) => (
+          <li class="card tone-card">
+            <span class="num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="card-title">{c.title}</h3>
+            <p>{c.text}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="after">{what.after} <a href={what.afterLink.href}>{what.afterLink.label}</a>.</p>
+    </div>
+  </section>
+
+  <!-- Who it is for, and the two strands -->
+  <section class="who tone-light section" aria-labelledby="who-title">
+    <div class="container">
+      <div class="split">
+        <div>
+          <h2 id="who-title">{who.heading}</h2>
+          <p class="lead">{who.lead}</p>
+          <p class="intake">{who.intake}</p>
+        </div>
+        <div class="card tone-card signs">
+          <p class="signs-intro"><strong>{who.signsIntro}</strong></p>
+          <ul class="bullets">{who.signs.map((s) => <li>{s}</li>)}</ul>
+        </div>
+      </div>
+
+      <div class="strands">
+        <h2 id="strands-title">{strands.heading}</h2>
+        <p class="lead measure-wide">{strands.lead}</p>
+        <ul class="strand-grid">
+          {strands.items.map((s) => (
+            <li>
+              <h3 class="card-title">{s.title}</h3>
+              <p>{s.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support, not treatment -->
+  <section class="isnot tone-alt section" aria-labelledby="isnot-title">
+    <div class="container">
+      <h2 id="isnot-title">{isNot.heading}</h2>
+      <div class="isnot-grid">
+        {[{ ...isNot.is, cls: 'label-are' }, { ...isNot.not, cls: 'label-not' }].map((col) => (
+          <div class="card tone-card">
+            <h3 class:list={['eyebrow', col.cls]}>{col.label}</h3>
+            <ul class="bullets">{col.items.map((i) => <li>{i}</li>)}</ul>
+          </div>
+        ))}
+      </div>
+      <p class="signpost">{isNot.signpost} <a href={isNot.signpostLink.href}>{isNot.signpostLink.label}</a>.</p>
+
+      <div class="safety card-dark tone-panel">
+        <h2 class="safety-title">{safety.heading}</h2>
+        <ul class="safety-list">{safety.items.map((s) => <li>{s}</li>)}</ul>
+        <p class="safety-foot"><a href={safety.link.href}>{safety.link.label}</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Outcomes -->
+  <section class="outcomes tone-light section" aria-labelledby="outcomes-title">
+    <div class="container">
+      <h2 id="outcomes-title">{outcomes.heading}</h2>
+      <ul class="outcome-grid">
+        {outcomes.items.map((o) => (
+          <li>
+            <h3 class="card-title">{o.title}</h3>
+            <p>{o.text}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="outcomes-note measure-wide">{outcomes.note}</p>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="closing tone-panel section" aria-labelledby="closing-title">
+    <div class="container">
+      <h2 id="closing-title" class="closing-title">{cta.heading}</h2>
+      <p class="lead measure-wide">{cta.text}</p>
+      <a class="button button-amber" href={cta.primary.href}>{cta.primary.label}</a>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .hero { padding-block: clamp(3.5rem, 2rem + 5vw, 6.5rem); }
+  .status { color: var(--dark-caption); }
+  .hero-title { max-width: 16ch; margin-bottom: 1.75rem; }
+  .hero-lead { max-width: 36rem; margin-bottom: 0.75rem; }
+  .hero-sub { max-width: 36rem; color: var(--dark-secondary); }
+  .promise { display: inline-block; margin: 0.5rem 0 2.25rem; padding-left: 1rem; border-left: 3px solid var(--amber); font-weight: 650; color: var(--dark-text); font-size: var(--fs-lead); }
+
+  .problem h2 { margin-bottom: 1.25rem; }
+  .areas-intro { color: var(--dark-text); font-weight: 600; margin-bottom: 0.75rem; }
+  .areas { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.5rem; border-top: 1px solid var(--dark-rule); }
+  .areas li { padding-block: 0.85rem; border-bottom: 1px solid var(--dark-rule); color: var(--dark-text); }
+
+  .stats-heading { margin-top: var(--space-6); font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem); }
+  .stat-group { margin-top: var(--space-4); }
+  .stats { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+  .stat { border-top: 2px solid var(--amber); padding-top: 1rem; }
+  .stat-figure { font-family: var(--font-head); font-weight: 800; font-size: var(--fs-stat); line-height: 1; letter-spacing: -0.03em; color: var(--head); margin-bottom: 0.75rem; }
+  .stat-text { margin: 0; }
+  .stat-source { margin-top: 1rem; }
+  .stat-source strong { color: var(--dark-secondary); }
+  .stat-source a { color: var(--caption); display: inline-flex; align-items: center; min-height: 44px; }
+
+  .research h2 { margin: 0; }
+  .design-heading { margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--head); }
+  .ticks { list-style: none; display: grid; gap: 0.5rem; }
+  .ticks li { padding-left: 1.75rem; position: relative; color: var(--head); font-weight: 500; }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: 0.45em; width: 0.9rem; height: 0.5rem; border-left: 2px solid var(--teal); border-bottom: 2px solid var(--teal); transform: rotate(-45deg); }
+  .research-source { margin: 1.5rem 0 0.25rem; }
+  .sources { list-style: none; display: grid; gap: 0.25rem; }
+  .sources a { color: var(--light-body); display: inline-block; padding-block: 0.7rem; min-height: 44px; }
+
+  .what h2 { margin-bottom: 1rem; }
+  .what :global(.what-photo) { margin-top: var(--space-4); }
+  .cards { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-4); }
+  .cards p { font-size: 1rem; }
+  .num { display: block; font-family: var(--font-head); font-weight: 800; color: var(--teal); margin-bottom: 0.5rem; }
+  .card-title { font-size: 1.25rem; margin-bottom: 0.6rem; }
+  .after { margin-top: var(--space-4); max-width: 44rem; }
+
+  .who h2 { margin-bottom: 1rem; }
+  .intake { margin-top: 1rem; }
+  .signs { padding: 2rem 1.75rem; }
+  .signs-intro { color: var(--head); margin-bottom: 0.75rem; }
+  .signs .bullets { font-size: 1rem; }
+  .strands { margin-top: var(--space-6); }
+  .strands h2 { margin-bottom: 1rem; }
+  .strand-grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: var(--space-4); }
+  .strand-grid li { border-top: 2px solid var(--light-heading); padding-top: 1rem; }
+
+  .isnot h2 { margin-bottom: var(--space-4); }
+  .isnot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .isnot-grid .card { padding: 2rem 1.75rem; }
+  .isnot-grid .bullets { font-size: 1rem; }
+  .label-are { color: var(--teal); }
+  .label-not { color: var(--amber-text); }
+  .signpost { margin-top: 1.5rem; }
+
+  .safety { margin-top: var(--space-6); padding: clamp(1.75rem, 1rem + 2.5vw, 3rem); border-left: 4px solid var(--amber); }
+  .safety-title { font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem); margin-bottom: 1.25rem; }
+  .safety-list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; }
+  .safety-list li { padding-block: 0.85rem; border-bottom: 1px solid var(--dark-rule); color: var(--dark-text); }
+  .safety-foot { margin-top: 1.25rem; }
+  .safety-foot a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dark-text); }
+
+  .outcomes h2 { margin-bottom: var(--space-4); }
+  .outcome-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
+  .outcome-grid li { border-top: 2px solid var(--teal); padding-top: 1rem; }
+  .outcome-grid p { font-size: 1rem; }
+  .outcomes-note { margin-top: var(--space-4); }
+
+  .closing-title { max-width: 20ch; margin-bottom: 1rem; }
+  .closing .lead { margin-bottom: 2rem; }
+
+  @media (max-width: 1000px) {
+    .cards, .outcome-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 760px) {
+    .stats, .strand-grid, .isnot-grid, .safety-list { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .cards, .outcome-grid, .areas { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

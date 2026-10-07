@@ -116,7 +116,7 @@ for (const [, loc] of sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)) {
   if (loc.includes('.html')) problems.push(`sitemap: ${loc} contains .html`);
   if (!resolvePage(new URL(loc).pathname)) problems.push(`sitemap: ${loc} has no page`);
 }
-for (const req of ['/', '/about', '/programmes', '/partners', '/lets-talk', '/privacy', '/safeguarding', '/accessibility']) {
+for (const req of ['/', '/about', '/programmes', '/beyond-the-tills', '/partners', '/lets-talk', '/privacy', '/safeguarding', '/accessibility']) {
   if (!sitemap.includes(`<loc>${SITE}${req === '/' ? '/' : req}</loc>`)) problems.push(`sitemap missing ${req}`);
 }
 const robots = readFileSync(join(DIST, 'robots.txt'), 'utf8');

@@ -32,6 +32,7 @@ Pages are emitted as `about.html` etc. and served at `/about`. `SeoHead.astro` s
 | `/` | (logo) | yes |
 | `/about` | About | yes |
 | `/programmes` | (Home "Our programmes" button) | yes |
+| `/beyond-the-tills` | (linked from How we help, Programmes, Partners) | yes |
 | `/partners` | For employers | yes |
 | `/lets-talk` | Talk to us (CTA) | yes |
 | `/privacy`, `/safeguarding`, `/accessibility` | footer | yes |

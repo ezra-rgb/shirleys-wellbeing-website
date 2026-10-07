@@ -49,3 +49,15 @@ Checked 7 October 2026.
 
 ## 8. Old domain
 - `shirleyswellbeing.co.uk` is **not registered** (Nominet WHOIS, 7 October 2026), so no 301 can be set up. To redirect it: register it, add it to the Render service as a custom domain with a redirect to `https://www.shirleyswellbeingcic.co.uk`, or use the registrar's 301 forwarding. Neither touches the live domain's DNS or email.
+
+## 9. Beyond the Tills page (added 7 October 2026)
+Source: "Beyond the Tills: Programme Design" (Google Doc, 7 October 2026). The page states no price, dates, venue, eligibility rules or referral routes, because the doc lists these as open decisions.
+- Programme length: the doc says **12 weeks**; the earlier V2 design PDF said "around six weeks". The site now says 12 weeks everywhere. Confirm.
+- Status shown as "In development" (the doc describes a pilot still to run). Confirm, and when cohorts are open, add dates and how to join.
+- Open decisions to resolve before the page can say more: eligibility (violence only, or verbal abuse and threats too; how recent), funding model (free, employer-funded or grant-funded), whether employers are told who takes part, session day/time/venue.
+- Referral routes in the doc (employers, USDAW reps, Retail Trust, GPs, NHS Talking Therapies) are not published until those arrangements exist.
+- Survey figures used: 95% experienced abuse (Q6, 40 of 42), 45% said it affected mental health (Q11, 19 of 42 including "if yes, describe"), 71% no support (Q15). Labelled as a local, self-selected sample.
+- Retail Trust 2024: 48% and 39% confirmed via trade press reproducing the press release (A1 Retail Magazine, The Grocer, Grocery Gazette). The base is 1,240 people with previous Retail Trust contact (headline "1,200"), self-selected. The charity's own article page could not be read (JavaScript-only); recheck if a readable version appears.
+- Research: Billings et al. (2023), European Journal of Psychotraumatology (verified, PMC10990448), and NICE NG116 recommendation 1.6.5 (verified). The design doc's "abuse roughly quadrupled since 2019" was not used: BRC figures give about 3.5 times.
+- Photo slot `programme-beyond-the-tills` appears on this page too once a real photo is supplied.
+- The page uses "MOVE" and "TALK" as card names for the boxercise and workshop parts, as the build instruction specified. Check this does not confuse them with the separate MOVE programme.

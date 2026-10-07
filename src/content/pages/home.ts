@@ -73,6 +73,10 @@ export const home = {
       },
     ],
   },
+  featured: {
+    text: 'Still feeling the effects of what happened? Beyond the Tills is our 12-week wellbeing and recovery programme.',
+    link: { label: 'About Beyond the Tills', href: '/beyond-the-tills' },
+  },
   programmesCta: { label: 'Our programmes', href: '/programmes' },
   employers: {
     eyebrow: 'For employers and partners',
