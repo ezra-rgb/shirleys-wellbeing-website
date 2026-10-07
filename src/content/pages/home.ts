@@ -69,31 +69,11 @@ export const home = {
         title: 'MOVE',
         text: 'Group movement and accessible fitness, at your own pace. Regular activity can support wellbeing and help ease anxiety and low mood.',
         strong: 'For wellbeing, not a replacement for therapy.',
-        link: { label: 'Find out more about MOVE', href: '#programme-move' },
+        link: { label: 'Find out more about MOVE', href: '/programmes#programme-move' },
       },
     ],
   },
-  programmes: {
-    heading: 'Programmes',
-    items: [
-      {
-        id: 'programme-beyond-the-tills',
-        photo: 'programme-beyond-the-tills' as const,
-        status: 'In development',
-        title: 'Beyond the Tills',
-        text: "A group programme of around six weeks for people who've experienced abuse or violence at work. It's about rebuilding confidence, finding steady ground and knowing where to turn.",
-        cta: { label: 'Register your interest', hidden: 'in Beyond the Tills', href: '/lets-talk#get-in-touch' },
-      },
-      {
-        id: 'programme-move',
-        photo: 'programme-move' as const,
-        status: 'Piloting now',
-        title: 'MOVE',
-        text: "Weekly movement sessions with music, for every fitness level. A way to feel better in your body and spend time with people who understand the job. It's for wellbeing, not a replacement for therapy.",
-        cta: { label: 'Ask about the next session', hidden: 'of MOVE', href: '/lets-talk#get-in-touch' },
-      },
-    ],
-  },
+  programmesCta: { label: 'Our programmes', href: '/programmes' },
   employers: {
     eyebrow: 'For employers and partners',
     heading: 'Your team carries what happens on the shop floor.',
@@ -101,5 +81,6 @@ export const home = {
       "Cameras and guards deter incidents. They don't help the person afterwards. We work alongside your existing support, with managers as well as staff, and we measure what changes.",
     body: 'Talk to us about referrals, commissioned programmes, venues or sponsorship.',
     cta: { label: 'Start a conversation', href: '/lets-talk#employers' },
+    more: { label: 'Partner with us', href: '/partners' },
   },
 };

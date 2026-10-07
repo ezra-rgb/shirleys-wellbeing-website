@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Photo from '../components/Photo.astro';
+import Expectations from '../components/Expectations.astro';
+import { programmes } from '../content/pages/programmes';
+const { hero, items, closing } = programmes;
+---
+<BaseLayout title={programmes.meta.title} description={programmes.meta.description}>
+  <section class="hero tone-dark" aria-labelledby="programmes-title">
+    <div class="container">
+      <p class="eyebrow">{hero.eyebrow}</p>
+      <h1 id="programmes-title" class="hero-title">{hero.title}</h1>
+      <p class="lead hero-lead">{hero.lead}</p>
+    </div>
+  </section>
+
+  <section class="list tone-alt section" aria-label="Programmes">
+    <div class="container programme-list">
+      {items.map((p) => (
+        <article id={p.id} class="programme" aria-labelledby={`${p.id}-title`}>
+          <Photo slot={p.photo} class="programme-photo" />
+          <div class="programme-body">
+            <p class="eyebrow programme-status">{p.status}</p>
+            <h2 id={`${p.id}-title`} class="programme-title">{p.title}</h2>
+            <p class="programme-text">{p.text}</p>
+            <a class="button button-teal" href={p.cta.href}>{p.cta.label}<span class="visually-hidden"> {p.cta.hidden}</span></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="tone-light section" aria-labelledby="closing-title">
+    <div class="container">
+      <div class="closing split">
+        <h2 id="closing-title">{closing.heading}</h2>
+        <div>
+          <p class="lead">{closing.text}</p>
+          <a class="text-link" href={closing.cta.href}>{closing.cta.label}</a>
+        </div>
+      </div>
+      <Expectations headingLevel="h2" />
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .hero { padding-block: clamp(3.5rem, 2rem + 5vw, 6.5rem); }
+  .hero-title { margin-bottom: 1.5rem; }
+  .hero-lead { max-width: 36rem; }
+
+  .programme-list { display: grid; gap: var(--space-6); }
+  .programme { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-5); align-items: center; scroll-margin-top: 1rem; }
+  .programme:not(:has(.programme-photo)) { grid-template-columns: minmax(0, 1fr); }
+  .programme:not(:has(.programme-photo)) .programme-body { max-width: 44rem; }
+  .programme + .programme { border-top: 1px solid var(--rule); padding-top: var(--space-6); }
+  .programme-status { margin-bottom: 0.75rem; }
+  .programme-title { font-size: var(--fs-h2); margin-bottom: 1rem; }
+  .programme-text { font-size: var(--fs-lead); margin-bottom: 1.75rem; }
+
+  .closing h2 { margin: 0; font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem); }
+  .closing .lead { margin-bottom: 0.5rem; }
+
+  @media (max-width: 860px) { .programme { grid-template-columns: minmax(0, 1fr); gap: var(--space-3); } }
+</style>

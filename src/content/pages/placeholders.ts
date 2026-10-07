@@ -29,7 +29,7 @@ export const getInvolvedPage = {
     "Whether you work in retail, employ people who do, or want to support the work, we'd like to hear from you.",
   ],
   primaryCta: { label: 'Talk to us', href: '/lets-talk' },
-  secondaryCta: { label: 'For employers', href: '/#employers' },
+  secondaryCta: { label: 'Partner with us', href: '/partners' },
 };
 
 export const notFoundPage = {

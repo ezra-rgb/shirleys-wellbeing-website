@@ -8,7 +8,7 @@ export type NavItem = { label: string; href: string; isAnchor?: boolean };
 export const primaryNav: NavItem[] = [
   { label: 'How we help', href: '/#how-we-help', isAnchor: true },
   { label: 'About', href: '/about' },
-  { label: 'For employers', href: '/#employers', isAnchor: true },
+  { label: 'For employers', href: '/partners' },
 ];
 
 export const primaryCta = { label: 'Talk to us', href: '/lets-talk' };

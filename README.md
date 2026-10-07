@@ -31,12 +31,14 @@ Pages are emitted as `about.html` etc. and served at `/about`. `SeoHead.astro` s
 | --- | --- | --- |
 | `/` | (logo) | yes |
 | `/about` | About | yes |
+| `/programmes` | (Home "Our programmes" button) | yes |
+| `/partners` | For employers | yes |
 | `/lets-talk` | Talk to us (CTA) | yes |
 | `/privacy`, `/safeguarding`, `/accessibility` | footer | yes |
 | `/stories`, `/get-involved` | no, until genuine content exists | noindex |
 | `/404` | | noindex |
 
-"How we help" and "For employers" are anchors on Home (`/#how-we-help`, `/#employers`).
+"How we help" is an anchor on Home (`/#how-we-help`). Programme detail lives only on `/programmes`.
 
 ## Where things live
 
