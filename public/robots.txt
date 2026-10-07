@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://shirleyswellbeingcic.co.uk/sitemap-index.xml
+Sitemap: https://www.shirleyswellbeingcic.co.uk/sitemap-index.xml

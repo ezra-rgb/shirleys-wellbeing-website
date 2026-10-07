@@ -1,0 +1,29 @@
+---
+/** Dark "What you can expect from us" panel, used on Home and Let's Talk. */
+import { expectations } from '../content/pages/shared';
+interface Props { headingLevel?: 'h2' | 'h3' }
+const { headingLevel = 'h3' } = Astro.props;
+const Heading = headingLevel;
+---
+<div class="expect card-dark tone-panel">
+  <Heading class="expect-heading">{expectations.heading}</Heading>
+  <ul class="expect-list">
+    {expectations.items.map((i) => (
+      <li>
+        <strong>{i.lead}</strong> {i.text}
+        {i.link && <> <a href={i.link.href}>{i.link.label}</a>.</>}
+      </li>
+    ))}
+  </ul>
+</div>
+<style>
+  .expect { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: var(--space-4) var(--space-5); padding: clamp(1.75rem, 1rem + 2.5vw, 2.75rem); margin-top: var(--space-6); }
+  .expect-heading { font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem); line-height: 1.1; letter-spacing: -0.025em; margin: 0; }
+  .expect-list { list-style: none; }
+  .expect-list li { padding-block: 1rem; border-bottom: 1px solid var(--dark-rule); font-size: 1.0625rem; }
+  .expect-list li:first-child { padding-top: 0; }
+  .expect-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .expect-list strong { color: var(--dark-text); }
+  .expect-list a { color: var(--dark-text); }
+  @media (max-width: 760px) { .expect { grid-template-columns: minmax(0, 1fr); } }
+</style>

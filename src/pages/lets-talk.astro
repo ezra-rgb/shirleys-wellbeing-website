@@ -1,21 +1,113 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/Hero.astro';
-import ContactBlock from '../components/ContactBlock.astro';
-import AudienceCards from '../components/AudienceCards.astro';
-import ClosingBlock from '../components/ClosingBlock.astro';
+import Expectations from '../components/Expectations.astro';
 import { letsTalk } from '../content/pages/lets-talk';
+import { supportRoutes } from '../content/pages/shared';
+import { site } from '../config/site';
+const { hero, who } = letsTalk;
+const methods = [
+  { label: 'Call', detail: 'Ring us on', value: site.contact.phoneDisplay, href: site.contact.phoneHref },
+  { label: 'Text', detail: 'Send a text to', value: site.contact.phoneDisplay, href: site.contact.smsHref },
+  { label: 'Email', detail: 'Write to us at', value: site.contact.email, href: site.contact.emailHref },
+];
 ---
-<BaseLayout title={letsTalk.meta.title} description={letsTalk.meta.description} footerTone="dark" footerAccent={letsTalk.footerAccent}>
-  <Hero variant="talk" title={letsTalk.hero.title} lead={letsTalk.hero.lead} body={letsTalk.hero.body} imageSlot="lets-talk-hero" accent={letsTalk.hero.accent} />
-  <section class="get-in-touch" aria-label="Get in touch">
+<BaseLayout title={letsTalk.meta.title} description={letsTalk.meta.description} footerContact={false}>
+  <section class="hero tone-dark" aria-labelledby="talk-title">
     <div class="container">
-      <ContactBlock mode="panel" id="get-in-touch" heading={letsTalk.getInTouch.heading} paragraph={letsTalk.getInTouch.paragraph} accent={letsTalk.getInTouch.accent} showSafety />
+      <p class="eyebrow">{hero.eyebrow}</p>
+      <h1 id="talk-title" class="hero-title">{hero.title}</h1>
+      <p class="lead hero-lead">{hero.lead}</p>
     </div>
   </section>
-  <AudienceCards heading={letsTalk.who.heading} lead={letsTalk.who.lead} />
-  <ClosingBlock heading={letsTalk.together.heading} paragraph={letsTalk.together.paragraph} cta={letsTalk.together.cta} accent={letsTalk.together.accent} />
+
+  <section id="get-in-touch" class="contact tone-panel section" aria-labelledby="contact-title">
+    <div class="container split split-narrow-wide">
+      <div>
+        <h2 id="contact-title">Get in touch</h2>
+        <ul class="methods">
+          {methods.map((m) => (
+            <li class="method">
+              <h3 class="method-label">{m.label}</h3>
+              <p class="method-detail">{m.detail} <a class="method-value" href={m.href}>{m.value}</a></p>
+            </li>
+          ))}
+        </ul>
+        <p class="caption">{site.locationLine}</p>
+      </div>
+      <aside class="safety" aria-labelledby="safety-title">
+        <h2 id="safety-title" class="safety-title">{site.crisis.notEmergency}</h2>
+        <p>If you or someone else is in danger, or you need urgent help, please use these services. They are open now.</p>
+        <ul class="safety-list">
+          {site.crisis.lines.map((l) => (
+            <li><span>{l.label}</span> <a href={l.href}>{l.name}</a></li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <section class="light tone-light section" aria-labelledby="who-title">
+    <div class="container">
+      <h2 id="who-title">{who.heading}</h2>
+      <ul class="who-grid">
+        {who.items.map((w) => (
+          <li id={w.id} class="card tone-card who-card">
+            <h3>{w.title}</h3>
+            <p>{w.text}</p>
+          </li>
+        ))}
+      </ul>
+      <Expectations />
+    </div>
+  </section>
+
+  <section id="other-support" class="support tone-alt section" aria-labelledby="support-title">
+    <div class="container">
+      <h2 id="support-title">{supportRoutes.heading}</h2>
+      <p class="lead measure-wide">{supportRoutes.intro}</p>
+      <ul class="support-grid">
+        {supportRoutes.items.map((s) => (
+          <li class="support-item">
+            <h3>{s.name}</h3>
+            <p>{s.text}</p>
+            {s.phone && <p class="support-phone">Call <a href={s.phone.href}>{s.phone.label}</a></p>}
+            {s.link && <a class="text-link" href={s.link.href} rel="noopener">{s.link.label}</a>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
 </BaseLayout>
 <style>
-  .get-in-touch { padding-block: var(--space-4) 0; }
+  .hero { padding-block: clamp(3.5rem, 2rem + 5vw, 6rem); }
+  .hero-title { max-width: 16ch; font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem); margin-bottom: 1.5rem; }
+  .hero-lead { max-width: 34rem; }
+
+  .contact h2 { margin-bottom: 1.5rem; }
+  .methods { list-style: none; display: grid; gap: 1.25rem; margin-bottom: 1.75rem; }
+  .method-label { font-family: var(--font-body); font-size: var(--fs-eyebrow); font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); margin: 0 0 0.25rem; }
+  .method-detail { margin: 0; display: flex; flex-wrap: wrap; align-items: center; column-gap: 0.4em; }
+  .method-value { display: inline-flex; align-items: center; min-height: 44px; color: var(--dark-text); font-weight: 600; font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem); text-decoration: underline; word-break: break-word; }
+
+  .safety { border: 1px solid var(--dark-rule); border-left: 4px solid var(--amber); border-radius: var(--radius-card); padding: 1.75rem 1.5rem; background: var(--dark-page); }
+  .safety-title { font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem); margin-bottom: 0.75rem; }
+  .safety-list { list-style: none; margin-top: 1rem; }
+  .safety-list li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 1rem; min-height: 48px; border-top: 1px solid var(--dark-rule); }
+  .safety-list a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; color: var(--dark-text); font-weight: 700; text-decoration: underline; }
+
+  .who-grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-4); }
+  .who-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .who-card p { font-size: 1rem; }
+  .who-card { scroll-margin-top: 1rem; }
+
+  .support h2 { margin-bottom: 1rem; }
+  .support-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; margin-top: var(--space-4); }
+  .support-item { border-top: 2px solid var(--light-heading); padding-top: 1rem; }
+  .support-item h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .support-item p { font-size: 1rem; margin-bottom: 0.5rem; }
+  .support-phone a { font-weight: 700; color: var(--light-heading); display: inline-flex; align-items: center; min-height: 44px; }
+  .support-item .text-link { font-size: 1rem; }
+
+  @media (max-width: 1000px) { .support-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .who-grid, .support-grid { grid-template-columns: minmax(0, 1fr); } }
 </style>

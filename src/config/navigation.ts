@@ -1,31 +1,20 @@
 /**
- * Navigation items feed the header, mobile menu and footer.
- * `href` is the launch destination; `futureHref` is what it becomes when the
- * named page exists. Switch by editing here and adding a redirect in public/_redirects.
+ * Primary navigation (V2): four items, "Talk to us" is the prominent CTA.
+ * Stories and Get Involved still exist as routes but are not promoted here
+ * until genuine content exists.
  */
-export type NavItem = {
-  label: string;
-  href: string;
-  futureHref?: string;
-  /** Anchor links never show an active state. */
-  isAnchor?: boolean;
-};
+export type NavItem = { label: string; href: string; isAnchor?: boolean };
 
 export const primaryNav: NavItem[] = [
-  { label: 'Home', href: '/' },
+  { label: 'How we help', href: '/#how-we-help', isAnchor: true },
   { label: 'About', href: '/about' },
-  { label: 'What We Do', href: '/#what-we-do', futureHref: '/what-we-do', isAnchor: true },
-  { label: 'For Retailers', href: '/#for-retailers', futureHref: '/for-retailers', isAnchor: true },
-  { label: 'Stories', href: '/stories' },
-  { label: 'Get Involved', href: '/get-involved' },
-  { label: 'Contact', href: '/lets-talk' },
+  { label: 'For employers', href: '/#employers', isAnchor: true },
 ];
 
-export const primaryCta = { label: "Let's Talk", href: '/lets-talk' };
+export const primaryCta = { label: 'Talk to us', href: '/lets-talk' };
 
-/** Legal links are rendered only when site.flags.showLegalLinks is true. */
 export const legalNav: NavItem[] = [
   { label: 'Privacy', href: '/privacy' },
-  { label: 'Terms', href: '/terms' },
+  { label: 'Safeguarding', href: '/safeguarding' },
   { label: 'Accessibility', href: '/accessibility' },
 ];

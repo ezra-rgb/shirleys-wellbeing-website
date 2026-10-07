@@ -1,0 +1,54 @@
+---
+/**
+ * Privacy notice. Contains only facts that are known and verifiable about how
+ * Shirley's and this website handle information. Sections marked `pending` need
+ * approved wording before this notice is complete: see docs/CONTENT-DEPENDENCIES.md.
+ */
+import PolicyLayout from '../layouts/PolicyLayout.astro';
+import { site } from '../config/site';
+const { contact, legal } = site;
+---
+<PolicyLayout
+  title="Privacy | Shirley's Wellbeing CIC"
+  description="How Shirley's Wellbeing CIC handles the information you share when you phone, text or email us, take part in our survey, or visit this website."
+  heading="Privacy"
+  intro="How we handle the information you share with us when you phone, text or email, when you take part in our survey, and when you visit this website."
+  updated="7 October 2026"
+  pending
+>
+  <h2>Who we are</h2>
+  <p>
+    {site.name} is a community interest company registered in {legal.placeOfRegistration}, company number {legal.companyNumber}.
+    Our registered office is {legal.registeredOffice}. We are responsible for the information described on this page.
+  </p>
+  <p>You can contact us about your information at any time: call <a href={contact.phoneHref}>{contact.phoneDisplay}</a> or email <a href={contact.emailHref}>{contact.email}</a>.</p>
+
+  <h2>When you phone or text us</h2>
+  <p>When you call or text, we see your phone number and anything you choose to tell us. You decide how much to share. You never need to describe what happened at work to speak to us.</p>
+
+  <h2>When you email us</h2>
+  <p>When you email, we receive your email address and whatever you include in your message. You don't need to explain why you're getting in touch.</p>
+
+  <h2>Our survey of retail workers</h2>
+  <p>In 2026 we surveyed retail workers about the effects of violence and abuse at work. Taking part was voluntary, and responses were collected anonymously. We publish only overall figures, such as the percentage of people who were offered no support. We never publish individual responses.</p>
+
+  <h2>This website</h2>
+  <ul>
+    <li>This website does not use cookies.</li>
+    <li>It has no analytics, tracking pixels or advertising scripts.</li>
+    <li>It has no forms, so it does not collect anything you type.</li>
+    <li>Its fonts are served from this website, not from a third party.</li>
+  </ul>
+  <p>The website is hosted by Render. Like any web host, it may keep standard technical records of requests, such as IP addresses, to run and protect the service.</p>
+
+  <h2>Why we use your information, and how long we keep it</h2>
+  <p class="pending">This section is being finalised and will set out the lawful basis we rely on and how long we keep phone, text, email and survey information.</p>
+
+  <h2>Who we share information with</h2>
+  <p>There are rare situations, such as a serious risk of harm, where information may need to be shared. Our <a href="/safeguarding">safeguarding and confidentiality page</a> explains this.</p>
+  <p class="pending">The full list of who we may share information with, and the services we use to store it, is being finalised.</p>
+
+  <h2>Your rights</h2>
+  <p>You can contact us to ask what information we hold about you. If you are unhappy with how we have handled your information, please tell us. You can also raise a concern with the Information Commissioner's Office at <a href="https://ico.org.uk/" rel="noopener">ico.org.uk</a>.</p>
+  <p class="pending">A full description of your rights and how to use them is being finalised.</p>
+</PolicyLayout>

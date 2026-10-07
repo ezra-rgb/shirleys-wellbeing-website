@@ -1,0 +1,18 @@
+---
+/** Slim crisis strip at the very top of every page. */
+---
+<aside class="crisis-strip tone-strip" aria-label="Urgent help">
+  <div class="container crisis-inner">
+    <p>In danger right now? Call <a href="tel:999">999</a>.</p>
+    <p>Need to talk to someone tonight? Samaritans <a href="tel:116123">116 123</a>, any time.</p>
+  </div>
+</aside>
+<style>
+  .crisis-strip { border-bottom: 1px solid var(--dark-rule); font-size: 0.875rem; line-height: 1.4; color: var(--dark-secondary); }
+  .crisis-inner { display: flex; justify-content: space-between; gap: 0.25rem 1.5rem; flex-wrap: wrap; padding-block: 0; }
+  p { margin: 0; line-height: 44px; }
+  /* Padding gives a 44px target without adding visible space around the number. */
+  a { color: var(--dark-text); font-weight: 700; text-decoration: underline; text-decoration-color: var(--dark-rule); display: inline-block; line-height: 44px; padding-inline: 10px; margin-inline: -10px; }
+  a:hover { text-decoration-color: currentColor; }
+  @media (max-width: 640px) { .crisis-inner { flex-direction: column; padding-block: 0; gap: 0; } }
+</style>

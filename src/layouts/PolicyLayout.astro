@@ -1,0 +1,29 @@
+---
+/** Long-form policy pages (Privacy, Safeguarding, Accessibility): dark title band into light reading area. */
+import BaseLayout from './BaseLayout.astro';
+interface Props { title: string; description: string; heading: string; intro: string; updated: string; pending?: boolean }
+const { title, description, heading, intro, updated, pending = false } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <section class="policy-hero tone-dark" aria-labelledby="policy-title">
+    <div class="container">
+      <h1 id="policy-title">{heading}</h1>
+      <p class="lead">{intro}</p>
+      <p class="caption">Last updated {updated}</p>
+    </div>
+  </section>
+  <div class="tone-light section">
+    <div class="container prose">
+      {pending && (
+        <p class="notice"><strong>This page is being completed.</strong> Some sections are still being finalised and approved, and are marked below. If you have a question in the meantime, please contact us and we will answer it directly.</p>
+      )}
+      <slot />
+    </div>
+  </div>
+</BaseLayout>
+<style>
+  .policy-hero { padding-block: clamp(3rem, 2rem + 4vw, 5rem); }
+  .policy-hero h1 { font-size: clamp(2.5rem, 1.8rem + 3vw, 4rem); }
+  .policy-hero .lead { max-width: 40rem; }
+  .prose :global(.pending) { color: var(--light-body); font-style: italic; }
+</style>

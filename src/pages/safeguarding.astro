@@ -1,0 +1,46 @@
+---
+/**
+ * Safeguarding and confidentiality. Only the principles supplied in the V2 mandate are stated.
+ * The detailed confidentiality exceptions, process and safeguarding lead are awaiting
+ * approval and are marked `pending`: see docs/CONTENT-DEPENDENCIES.md.
+ */
+import PolicyLayout from '../layouts/PolicyLayout.astro';
+import { site } from '../config/site';
+---
+<PolicyLayout
+  title="Safeguarding and confidentiality | Shirley's Wellbeing CIC"
+  description="What happens to what you share with Shirley's Wellbeing CIC, when information may need to be shared, and where to get urgent help. Shirley's is not an emergency service."
+  heading="Safeguarding and confidentiality"
+  intro="What happens to the things you tell us, and the rare situations where information may need to be shared."
+  updated="7 October 2026"
+  pending
+>
+  <h2>If you need help now</h2>
+  <p><strong>{site.crisis.notEmergency}.</strong> If you or someone else is in danger, or you need urgent help, please contact:</p>
+  <ul>
+    {site.crisis.lines.map((l) => <li>{l.label}: <a href={l.href}>{l.name}</a></li>)}
+  </ul>
+
+  <h2>You stay in control of what you share</h2>
+  <ul>
+    <li>Nobody is ever asked to describe what happened.</li>
+    <li>You decide how much to share. Saying nothing about what happened is completely fine.</li>
+    <li>You can stop at any time, with no explanation needed.</li>
+    <li>We'll tell you what happens next before it happens.</li>
+  </ul>
+
+  <h2>What happens to what you tell us</h2>
+  <p>We treat what you tell us with care. We are not investigators: we don't look into incidents or decide who was to blame.</p>
+  <p class="pending">Details of who can see what you share, how it is recorded and how it is kept secure are being finalised.</p>
+
+  <h2>When information may need to be shared</h2>
+  <p>There are rare situations where we may need to share information, for example if there is a serious risk of harm to you or to someone else.</p>
+  <p class="pending">The full list of these situations, who we would share information with, and how we would involve you are being finalised and approved.</p>
+
+  <h2>Your employer</h2>
+  <p class="pending">Our position on sharing information with employers, including when an employer has referred you, is being confirmed and will be set out here.</p>
+
+  <h2>Our safeguarding arrangements</h2>
+  <p class="pending">Our safeguarding policy, and who to contact with a safeguarding concern, will be published here.</p>
+  <p>In the meantime, if you have a concern, contact us on <a href={site.contact.phoneHref}>{site.contact.phoneDisplay}</a> or <a href={site.contact.emailHref}>{site.contact.email}</a>. If anyone is in immediate danger, call <a href="tel:999">999</a>.</p>
+</PolicyLayout>

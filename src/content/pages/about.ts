@@ -1,76 +1,66 @@
-/** About page copy. Source: Website Copy Pack V2 and Business Plan sections 2, 4, 7 and 15. */
+/**
+ * About page copy. Visual and copy source: design/v2/about.pdf, restructured per
+ * the V2 mandate section 7 (story ends on the question; four commitments).
+ */
 export const about = {
   meta: {
-    title: "About Shirley's | Shirley's Wellbeing CIC",
+    title: "About Shirley's | Named after Shirley, built for the person behind the till",
     description:
-      "Shirley's Wellbeing CIC is a people-first community organisation created to support the wellbeing, confidence, connection and recognition of people working in retail.",
+      "Shirley's Wellbeing CIC is a community interest company for retail workers dealing with the aftermath of abuse, threats and violence at work. What we are, what we're not, and how we work.",
   },
   hero: {
-    title: [{ text: 'People', br: true }, { text: 'always', script: true }, { text: ' first.' }],
-    lead: 'Because behind every workplace role is a person.',
-    body: [
-      "Shirley's Wellbeing CIC is a people-first community organisation created to support the wellbeing, confidence, connection and recognition of people working in retail.",
-    ],
-    cta: { label: "Let's Talk", href: '/lets-talk' },
-    accent: 'Real People Brighter Workplaces',
+    eyebrow: 'People always first',
+    title: 'Named after Shirley. Built for the person behind the till.',
+    lead:
+      "Shirley's Wellbeing CIC is a community interest company for retail workers dealing with the aftermath of abuse, threats and violence at work.",
   },
   story: {
     heading: 'Our story',
-    subheading: 'A personal story. A wider purpose.',
     paragraphs: [
-      "Shirley's Wellbeing CIC takes its name from Shirley, Denise Sutherland's mother. Her story and values form part of the heart behind the organisation, representing the importance of seeing the person, recognising their experiences and creating opportunities for people to feel supported, valued and connected.",
-      'Founder Denise Sutherland brings more than 20 years of experience in retail, including management, alongside experience in fitness, counselling training and supporting people through domestic violence. These experiences have shaped a whole-person approach to wellbeing.',
+      "Shirley was Denise Sutherland's mother. Her way of seeing the person first, and of noticing when someone was struggling, is the heart of the organisation that carries her name.",
+      "Denise spent more than 20 years in retail, including in management. She knows what it's like to be the one called to the front when a customer turns, and the one expected to hold the team together afterwards. Alongside retail she brings experience in fitness, counselling training and supporting people through domestic violence.",
     ],
-    pullLine: 'What happens to the person afterwards?',
+    closingLead: 'That combination shaped one question:',
+    question: 'What happens to the person afterwards?',
   },
-  whyPanel: {
-    heading: "Why Shirley's exists",
-    groups: [
-      {
-        subheading: 'Why people in retail?',
-        paragraphs: [
-          'People working in retail can experience verbal abuse, threatening behaviour, aggression, harassment and physical violence at work. These experiences can arise through interactions with customers, as well as through situations and relationships within the workplace itself.',
-          "Whatever the source, Shirley's focus is on the person and the impact these experiences can have on wellbeing, confidence and sense of safety.",
-          'But difficult experiences are not the only reason someone might engage. People may also want movement, connection, appreciation, confidence-building or general wellbeing support.',
-        ],
-      },
-      {
-        subheading: 'Beyond the role',
-        paragraphs: [
-          "Shirley's looks beyond the workplace role and considers the whole person. The organisation is particularly interested in what happens following workplace violence, abuse and other difficult experiences.",
-          'We are not here to investigate incidents or assign blame. We aim to complement existing employer and specialist provision, not duplicate it.',
-          'We offer multiple ways to engage because one route into wellbeing will not suit everyone.',
-        ],
-      },
-    ],
-    accent: 'You are more than your job.',
+  areNot: {
+    heading: "What we are, and what we're not",
+    are: {
+      label: 'We are',
+      items: [
+        'Group support, movement and conversation for people affected by violence and abuse at work',
+        'A route to specialist help when someone needs more, including NHS Talking Therapies and their GP',
+        'Support for managers and supervisors, who are often both targets and the people expected to help',
+        'A partner to employers, alongside the support they already offer',
+      ],
+    },
+    not: {
+      label: "We're not",
+      items: [
+        'An emergency or crisis service',
+        'Therapy or treatment for trauma',
+        "Investigators. We don't look into incidents or decide who was to blame",
+        "Going to ask you to relive what happened. Nobody is ever asked to describe what happened",
+      ],
+    },
   },
-  values: { heading: 'Our values' },
   approach: {
-    heading: 'Our approach',
-    paragraphs: [
-      'We bring together movement, conversation, support, confidence, appreciation, community and advocacy.',
-      'We start locally, build trust, listen to people in retail, test what works, learn from the experience and refine what we do.',
-      'Our approach is shaped by lived experience, professional practice, research, consultation, participant feedback and evaluation.',
+    heading: 'How we work',
+    lead: "We're starting small and local, in Solihull and the West Midlands, so we can get it right before we grow.",
+    commitments: [
+      { title: 'Grounded in evidence.', text: 'Our programmes follow what the research says helps after a difficult experience, and avoid what can make things worse.' },
+      { title: 'Built with retail workers.', text: 'Our 2026 survey of retail staff shaped what we offer, and their feedback keeps shaping it.' },
+      { title: 'Measured honestly.', text: "We track wellbeing, confidence and help-seeking before and after, and we'll publish what we find." },
+      { title: 'Safe by design.', text: "You choose how much to share, you can opt out at any point, and we'll always tell you what happens next." },
     ],
-    steps: ['Start local', 'Build trust', 'Listen', 'Test', 'Learn', 'Refine', 'Grow'],
-    cta: { label: 'See what we do', href: '/#what-we-do' },
-    imageAccent: 'Kindness Creates Change',
-    accent: 'Stronger People Brighter Communities',
   },
-  vision: {
-    heading: 'Our long-term vision',
-    paragraphs: [
-      'A future where people feel seen, valued and supported in the workplace and beyond.',
-      "Shirley's long-term ambition is to build a sustainable, respected and influential people-first wellbeing organisation recognised for supporting the person behind the workplace role.",
-      "Retail will always be part of Shirley's story. Over time, the organisation may adapt successful approaches for other workplace communities where evidence supports it, without losing its origin or the evidence developed with people in retail.",
+  values: {
+    heading: 'Our values',
+    items: [
+      { name: 'People', line: 'See the person first.' },
+      { name: 'Trust', line: 'Earn it. Build it. Protect it.' },
+      { name: 'Respect', line: 'For yourself. For others.' },
+      { name: 'Community', line: 'Bringing people together.' },
     ],
-    cta: { label: 'Join our journey', href: '/lets-talk' },
   },
-  stayInTouch: {
-    heading: "Let's stay in touch",
-    cta: { label: "Let's Talk", href: '/lets-talk' },
-    accent: 'People Change Everything',
-  },
-  footerAccent: 'See the person first.',
 };

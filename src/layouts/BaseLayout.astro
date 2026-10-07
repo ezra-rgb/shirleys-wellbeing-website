@@ -1,32 +1,29 @@
 ---
-/** Base layout: fonts, styles, skip link, header, main, footer. */
-import '@fontsource-variable/playfair-display';
-import '@fontsource-variable/inter';
-import '@fontsource-variable/caveat';
+/** Base layout: fonts, styles, skip link, crisis strip, header, main, footer. */
+import '@fontsource/archivo/latin-800.css';
+import '@fontsource-variable/public-sans/wght.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
-import '../styles/typography.css';
-import '../styles/utilities.css';
 import SeoHead from '../components/SeoHead.astro';
+import CrisisStrip from '../components/CrisisStrip.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-interface Props { title: string; description: string; footerTone?: 'light' | 'dark'; footerAccent?: string; noindex?: boolean }
-const { title, description, footerTone = 'light', footerAccent, noindex = false } = Astro.props;
+interface Props { title: string; description: string; noindex?: boolean; footerContact?: boolean }
+const { title, description, noindex = false, footerContact = true } = Astro.props;
 ---
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" class="no-js">
   <head>
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
     <SeoHead title={title} description={description} noindex={noindex} />
-    <script is:inline>
-      if (location.search.includes('slots=1')) document.documentElement.classList.add('show-slots');
-    </script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <CrisisStrip />
     <Header />
     <main id="main" tabindex="-1">
       <slot />
     </main>
-    <Footer tone={footerTone} accent={footerAccent} />
+    <Footer showContact={footerContact} />
   </body>
 </html>

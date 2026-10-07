@@ -1,0 +1,34 @@
+---
+/** Accessibility statement. Describes what was built and how it was tested; makes no formal conformance claim. */
+import PolicyLayout from '../layouts/PolicyLayout.astro';
+import { site } from '../config/site';
+---
+<PolicyLayout
+  title="Accessibility | Shirley's Wellbeing CIC"
+  description="How the Shirley's Wellbeing CIC website is built to be usable by as many people as possible, how it was tested, and how to tell us about a problem."
+  heading="Accessibility"
+  intro="We want everyone to be able to use this website, including people who use a keyboard, a screen reader, magnification or a small screen."
+  updated="7 October 2026"
+>
+  <h2>What we have done</h2>
+  <p>We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. In building this website we have:</p>
+  <ul>
+    <li>used text and background colours with a contrast ratio of at least 4.5 to 1</li>
+    <li>made buttons and links at least 44 pixels high so they are easier to tap</li>
+    <li>shown a clear outline around whatever has keyboard focus</li>
+    <li>added a "Skip to content" link at the start of every page</li>
+    <li>used headings in a logical order, and labelled navigation areas, so screen readers can move around each page</li>
+    <li>made every page work on screens from 320 pixels wide without scrolling sideways</li>
+    <li>respected the "reduce motion" setting on your device</li>
+    <li>kept the site free of pop-ups, auto-playing media and time limits</li>
+  </ul>
+
+  <h2>How we tested it</h2>
+  <p>We checked every page at phone, tablet and desktop widths, navigated each page using only a keyboard, and checked the page structure that screen readers use. We also run automated checks for missing image descriptions, broken links and colour contrast every time the site is updated.</p>
+
+  <h2>Known issues</h2>
+  <p>We are not currently aware of any accessibility problems. If you find one, we would like to know.</p>
+
+  <h2>Tell us about a problem</h2>
+  <p>If something on this website is hard to use, or you need information in a different format, call <a href={site.contact.phoneHref}>{site.contact.phoneDisplay}</a> or email <a href={site.contact.emailHref}>{site.contact.email}</a>. Tell us the page and what went wrong, and we will do our best to help.</p>
+</PolicyLayout>

@@ -1,0 +1,19 @@
+---
+/** Renders a supplied documentary photograph for a slot, or nothing if none exists yet. */
+import { Picture } from 'astro:assets';
+import { getPhoto } from '../lib/photos';
+import type { PhotoSlotName } from '../config/photos';
+interface Props { slot: PhotoSlotName; class?: string; loading?: 'lazy' | 'eager' }
+const { slot, class: cls, loading = 'lazy' } = Astro.props;
+const photo = getPhoto(slot);
+---
+{photo && (
+  <div class:list={['photo-frame', cls]} style={`aspect-ratio: ${photo.ratio}`}>
+    <Picture src={photo.src} alt={photo.alt} widths={[480, 800, 1200]} sizes={photo.sizes} formats={['avif', 'webp']}
+             class="photo" loading={loading} style={photo.focal ? `object-position: ${photo.focal}` : undefined} />
+  </div>
+)}
+<style>
+  .photo-frame { overflow: hidden; border-radius: 2px; }
+  .photo-frame :global(picture) { height: 100%; }
+</style>

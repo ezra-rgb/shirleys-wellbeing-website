@@ -1,0 +1,28 @@
+---
+/** Short single-message page (Stories, Get Involved, 404): dark hero with one or two actions. */
+import BaseLayout from '../layouts/BaseLayout.astro';
+type Cta = { label: string; href: string };
+interface Props {
+  page: { meta: { title: string; description: string }; eyebrow?: string; title: string; body: string[]; primaryCta: Cta; secondaryCta?: Cta };
+  noindex?: boolean;
+}
+const { page, noindex = false } = Astro.props;
+---
+<BaseLayout title={page.meta.title} description={page.meta.description} noindex={noindex}>
+  <section class="simple tone-dark" aria-labelledby="simple-title">
+    <div class="container">
+      {page.eyebrow && <p class="eyebrow">{page.eyebrow}</p>}
+      <h1 id="simple-title">{page.title}</h1>
+      {page.body.map((p, i) => <p class:list={['measure-wide', i === 0 && 'lead']}>{p}</p>)}
+      <div class="button-row">
+        <a class="button button-amber" href={page.primaryCta.href}>{page.primaryCta.label}</a>
+        {page.secondaryCta && <a class="button button-ghost" href={page.secondaryCta.href}>{page.secondaryCta.label}</a>}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .simple { padding-block: clamp(3.5rem, 2rem + 5vw, 6.5rem); border-bottom: 1px solid var(--dark-rule); }
+  h1 { max-width: 16ch; font-size: clamp(2.5rem, 1.7rem + 3.4vw, 4.5rem); margin-bottom: 1.5rem; }
+  .button-row { margin-top: 2rem; }
+</style>
