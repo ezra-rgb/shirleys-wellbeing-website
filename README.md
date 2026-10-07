@@ -1,88 +1,70 @@
-# Shirley's Wellbeing CIC website
+# Shirley's Wellbeing CIC website (V2)
 
-Public website for Shirley's Wellbeing CIC. Static, three-page launch (Home, About, Let's Talk) with minimal placeholder routes for Stories and Get Involved, built to be extended without rebuilding.
+Public website for Shirley's Wellbeing CIC: for people in retail affected by violence and abuse at work.
 
-Built with [Astro](https://astro.build) (static output), plain CSS design tokens, self-hosted fonts and inline SVG icons. No backend, no forms, no database, no analytics, no cookies.
+V2 follows the "dark into light" design in `design/v2/home.pdf` and `design/v2/about.pdf`. V1 is preserved in Git history (commit `2735bac` and earlier).
+
+Built with [Astro](https://astro.build) (static output), plain CSS tokens and self-hosted fonts (Archivo 800, Public Sans). No backend, no forms, no database, no analytics, no cookies, no third-party scripts.
 
 ## Run locally
 
 ```bash
 npm install
-npm run dev        # http://localhost:4321 with live reload
-npm run check      # content governance check + type check
-npm run build      # production build into dist/ (runs the content check and regenerates the Open Graph image first)
-npm run preview    # serve dist/ locally
+npm run dev        # http://localhost:4321
+npm run check      # content check + type check
+npm run build      # content check, astro build, then verification of dist/
+npm run preview    # serve dist/
+npm run og         # re-render public/og-image.png with local Chrome (commit the result)
 ```
 
-Node 20 or later. Append `?slots=1` to any page URL to label image placeholders with their slot names.
+Node 20 or later.
 
 ## Deploy
 
-The site is a static folder (`dist/`). Recommended host: Cloudflare Pages or Netlify.
+Render Static Site, auto-deploys from `main` on GitHub. Build command `npm run build`, publish directory `dist`. www is canonical; Render 301s the apex to it. DNS and email are managed elsewhere and are not part of this repo.
 
-- Build command: `npm run build`
-- Output directory: `dist`
-- Node version: 20 or later
-- Redirects: `public/_redirects` (copied into `dist/`)
-- Set `site` in `astro.config.mjs` to the live domain before the first production deploy. It feeds canonical URLs, the sitemap and Open Graph tags.
+Pages are emitted as `about.html` etc. and served at `/about`. `SeoHead.astro` strips the extension so canonicals, `og:url` and the sitemap all use the clean served URL.
 
-Pull requests get preview URLs on either host. Production deploys from `main`.
+## Routes
+
+| Route | In primary nav | Indexed |
+| --- | --- | --- |
+| `/` | (logo) | yes |
+| `/about` | About | yes |
+| `/lets-talk` | Talk to us (CTA) | yes |
+| `/privacy`, `/safeguarding`, `/accessibility` | footer | yes |
+| `/stories`, `/get-involved` | no, until genuine content exists | noindex |
+| `/404` | | noindex |
+
+"How we help" and "For employers" are anchors on Home (`/#how-we-help`, `/#employers`).
 
 ## Where things live
 
 | What | Where |
 | --- | --- |
-| Organisation facts, contact details, location and safety lines, feature flags, legal fields | `src/config/site.ts` |
-| Navigation (launch and future hrefs) | `src/config/navigation.ts` |
-| Image slot registry (ratios, alt text, focal points) | `src/config/images.ts` |
+| Organisation facts, contact, crisis lines, company details | `src/config/site.ts` |
+| Navigation | `src/config/navigation.ts` |
+| Photo slots (brief, alt text, ratio) | `src/config/photos.ts` |
 | Page copy | `src/content/pages/*.ts` |
-| Programmes (one file each, with status) | `src/content/programmes/*.md` |
-| Entry routes (MOVE, TALK, CONNECT, BE SUPPORTED) | `src/content/routes/*.md` |
-| Audience cards on Let's Talk | `src/content/audiences/*.md` |
-| Values | `src/content/values.ts` |
-| Design tokens (colours, type, spacing) | `src/styles/tokens.css` |
-| Components | `src/components/` |
-| Pages (routes) | `src/pages/` |
-
-No sentence the visitor reads lives inside a component. Edit content files, not components.
+| Policy page copy | `src/pages/privacy.astro`, `safeguarding.astro`, `accessibility.astro` |
+| Design tokens | `src/styles/tokens.css` |
+| Global styles and tones | `src/styles/base.css` |
+| Outstanding content | `docs/CONTENT-DEPENDENCIES.md` |
 
 ## Common changes
 
-**Swap in a photograph.** Drop the file at `src/assets/images/<page>/<slot>.jpg` (or `.png`, `.webp`, `.avif`), using the slot name from `src/config/images.ts` (for example `src/assets/images/home/home-hero.jpg`). Write its `alt` text in the registry. Rebuild. The frame keeps its aspect ratio so layout does not move. The optional founder image slot `about-story` appears only once a file exists.
+**Add a photograph.** Save it as `src/assets/photos/<slot>.jpg` using a slot name from `src/config/photos.ts`, and write its `alt` there describing what it actually shows. Until a file exists the slot renders nothing. The build fails if a photo has no alt text. Documentary photography only; no stock images.
 
-**Add the logo.** Save `src/assets/brand/logo.svg` (dark) and `src/assets/brand/logo-white.svg`. The header and footer switch from the temporary script-font wordmark automatically. Then replace the wordmark in `scripts/og-image.mjs` and `public/favicon.svg` with the real marks.
+**Add the consented quote on Home.** Fill `home.problem.quote` in `src/content/pages/home.ts` and set `consentConfirmed: true`.
 
-**Switch on social links.** Add entries to `site.social` in `src/config/site.ts` and set `flags.showSocial` to `true`.
+**Add a story.** Add markdown to `src/content/stories/`. The schema requires `consentConfirmed: true` and a `consentDate`.
 
-**Add legal pages.** Add markdown to `src/content/legal/` (privacy, terms, accessibility), create the three page files in `src/pages/` from the placeholder page pattern, then set `flags.showLegalLinks` to `true`. Fill `site.legal` with the company number, place of registration and registered office when supplied; the footer prints them automatically.
+## Build guards
 
-**Change a programme status.** Edit `status` in the programme's file. Only these values build, mirroring the Business Plan: `pilot-development`, `in-development`, `early-development`, `developing`, `ongoing`, `planned`, `future`, `longer-term`.
+`scripts/check-content.mjs` (before build) fails on em dashes, retired taglines, mock-up alt text, filler text, or photos without alt text.
 
-**Add a programme page.** Set `hasPage: true` and add a body to the programme's markdown file, then create `src/pages/what-we-do/[slug].astro` reading the collection. The Home card's link switches from `launchCta` to `futureCta` on its own.
+`scripts/check-dist.mjs` (after build) fails if any page has a wrong canonical or `og:url`, missing metadata, a broken internal link or anchor, an image without meaningful alt text, placeholder text, a missing crisis strip or footer crisis panel, a missing footer policy link or company details, an unexpected phone/email link, insecure content, or a broken heading order. It also checks the sitemap and robots.txt.
 
-**Turn an anchor into a page.** Create the page (for example `src/pages/what-we-do.astro`), change the item's `href` in `src/config/navigation.ts`, and add a line to `public/_redirects`.
+## Tone and claims
 
-**Add a story.** Add markdown to `src/content/stories/`. The schema requires `consentConfirmed: true` and a `consentDate`; the build fails otherwise. Attribution defaults to Anonymous. Participation in Shirley's activity never requires participation in publicity.
-
-**Turn on a testimonial on Home.** `PartnerStatement` has a `testimonial` variant that only renders with `consentConfirmed`. Until a consented quote exists it shows the organisational statement.
-
-## Content rules enforced by the build
-
-- No em dashes anywhere in content, config, pages or components (`scripts/check-content.mjs`).
-- Every programme has a valid status.
-- Stories cannot build without recorded consent.
-- Testimonials cannot render without recorded consent.
-
-## Accessibility
-
-Target WCAG 2.2 AA. Coral text and button fills use the deeper tokens `--coral-700` and `--coral-800` for contrast; the brand coral `--coral` is reserved for icons, hearts, borders and decorative uses. Handwritten accents are `aria-hidden`. Repeated link labels carry visually hidden context. Skip link, visible focus rings, 44px targets, `prefers-reduced-motion` respected.
-
-## Temporary mock-up images (visual QA only)
-
-The files currently in `src/assets/images/` are crops of the three approved mock-ups, generated by `node scripts/extract-mockup-images.mjs` from `design/mockups/`. They exist so the local site can be compared with the mock-ups. They are not Shirley's photography and nobody in them is a participant. Each crop already contains its handwritten accent or programme title, so the matching slot in `src/config/images.ts` carries `bakedAccent: true` or `bakedTitle: true`, which tells the component not to draw that text again.
-
-To replace one with a final photograph: overwrite the file, write the real `alt` text, and remove the `bakedAccent` / `bakedTitle` flag so the accent or title renders from the component again. Nothing else changes.
-
-## Not yet supplied (intentional placeholders)
-
-Final photography for all eleven slots (temporary mock-up crops are in place, see above), the logo, social URLs, privacy/terms/accessibility text, CIC registration number and registered office, and the live domain. See `src/config/site.ts` flags.
+"See the person first." is the only tagline. Nobody is ever asked to describe what happened. Shirley's is not an emergency service, therapy, trauma treatment or an investigator, and the site must not imply otherwise. Don't publish statistics, testimonials, partnerships or outcomes that haven't been verified.
