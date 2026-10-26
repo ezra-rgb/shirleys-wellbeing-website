@@ -48,7 +48,6 @@ export const sponsorsPage = {
       { title: 'Agreed up front', text: 'We agree together what your sponsorship funds before anything starts.' },
       { title: 'Honest reporting', text: "We check in on how people are doing at the start, at the end and three months later, and we'll tell you honestly what your support made possible." },
       { title: 'Privacy first', text: 'Sponsors never find out who has taken part, or what anyone has shared.' },
-      { title: 'Recognition', text: "With your agreement, your name and logo appear on this page." },
     ],
   },
   closing: {

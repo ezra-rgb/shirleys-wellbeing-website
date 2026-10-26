@@ -64,6 +64,6 @@ Source: "Beyond the Tills page preview" (PDF, October 2026), built on "Beyond th
 
 ## 10. Sponsors page (added 26 October 2026)
 `src/pages/sponsors.astro`, copy in `src/content/pages/sponsors.ts`, sponsors in `src/config/sponsors.ts`.
-- Sponsors: The Quiet Orbit (links to thequietorbit.uk) and Sutherlands Performance Sciences Ltd (no website link; add one in `src/config/sponsors.ts` if they have a site). Logos taken from the People of the Pavements partners page; confirm both sponsors are happy for their logos to appear here.
+- Sponsors: The Quiet Orbit (links to thequietorbit.uk) and Sutherlands Performance Sciences Ltd (no website, so no link). **Confirmed 26 October 2026:** both companies are owned by the site owner, who granted permission to show both logos. Logos taken from the People of the Pavements partners page.
 - No prices or packages are published. What a sponsorship funds is agreed with each sponsor.
-- "What sponsors can expect" restates commitments already on the site (outcome check-ins at start, end and three months; confidentiality). Confirm the recognition line ("With your agreement, your name and logo appear on this page").
+- "What sponsors can expect" restates commitments already on the site (outcome check-ins at start, end and three months; confidentiality). The recognition line ("your name and logo appear on this page") was removed on 26 October 2026 at the owner's request.

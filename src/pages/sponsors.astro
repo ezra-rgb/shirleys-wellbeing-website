@@ -94,11 +94,10 @@ const { hero, current, ways, expect, closing } = sponsorsPage;
   .way-title { font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem); margin-bottom: 0.75rem; }
   .way-link { margin-top: auto; padding-top: 0.75rem; }
 
-  .expect-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; margin-top: var(--space-4); }
+  .expect-grid { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; margin-top: var(--space-4); }
   .expect-grid li { border-top: 4px solid var(--hope-coral); padding-top: 1rem; }
   .expect-grid li:nth-child(2) { border-top-color: var(--hope-sky); }
   .expect-grid li:nth-child(3) { border-top-color: var(--hope-leaf); }
-  .expect-grid li:nth-child(4) { border-top-color: var(--hope-lilac); }
   .expect-grid p { font-size: 1rem; }
   .card-title { font-size: 1.25rem; margin-bottom: 0.6rem; }
 
@@ -109,7 +108,6 @@ const { hero, current, ways, expect, closing } = sponsorsPage;
   .closing-contact { margin-top: 2rem; font-weight: 650; }
   .closing-contact a { display: inline-flex; align-items: center; min-height: 44px; }
 
-  @media (max-width: 1000px) { .expect-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 700px) { .way-grid { grid-template-columns: minmax(0, 1fr); } }
-  @media (max-width: 560px) { .expect-grid { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 760px) { .expect-grid { grid-template-columns: minmax(0, 1fr); } }
 </style>
