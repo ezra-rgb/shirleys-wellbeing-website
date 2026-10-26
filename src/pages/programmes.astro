@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Photo from '../components/Photo.astro';
 import Expectations from '../components/Expectations.astro';
+import ProgrammeArt from '../components/ProgrammeArt.astro';
+import { hasPhoto } from '../lib/photos';
 import { programmes } from '../content/pages/programmes';
 const { hero, items, closing } = programmes;
 ---
@@ -18,7 +20,9 @@ const { hero, items, closing } = programmes;
     <div class="container programme-list">
       {items.map((p) => (
         <article id={p.id} class="programme" aria-labelledby={`${p.id}-title`}>
-          <Photo slot={p.photo} class="programme-photo" />
+          {hasPhoto(p.photo)
+            ? <Photo slot={p.photo} class="programme-photo" />
+            : <ProgrammeArt name={p.art} class="programme-photo" />}
           <div class="programme-body">
             <p class="eyebrow programme-status">{p.status}</p>
             <h2 id={`${p.id}-title`} class="programme-title">{p.title}</h2>

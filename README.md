@@ -15,6 +15,7 @@ npm run check      # content check + type check
 npm run build      # content check, astro build, then verification of dist/
 npm run preview    # serve dist/
 npm run og         # re-render public/og-image.png with local Chrome (commit the result)
+npm run brand      # re-derive logo files and icons from design/brand/logo-source.png (commit the results)
 ```
 
 Node 20 or later.
@@ -50,13 +51,17 @@ Pages are emitted as `about.html` etc. and served at `/about`. `SeoHead.astro` s
 | Photo slots (brief, alt text, ratio) | `src/config/photos.ts` |
 | Page copy | `src/content/pages/*.ts` |
 | Policy page copy | `src/pages/privacy.astro`, `safeguarding.astro`, `accessibility.astro` |
-| Design tokens | `src/styles/tokens.css` |
+| Design tokens, including the "hope" accent colours | `src/styles/tokens.css` |
+| Logo source and derived files | `design/brand/logo-source.png`, `src/assets/brand/`, `public/favicon-32.png`, `public/apple-touch-icon.png` |
+| Brand illustrations (sunrise hero, programme stand-ins, route icons) | `src/components/HopeHorizon.astro`, `ProgrammeArt.astro`, `RouteIcon.astro` |
 | Global styles and tones | `src/styles/base.css` |
 | Outstanding content | `docs/CONTENT-DEPENDENCIES.md` |
 
 ## Common changes
 
-**Add a photograph.** Save it as `src/assets/photos/<slot>.jpg` using a slot name from `src/config/photos.ts`, and write its `alt` there describing what it actually shows. Until a file exists the slot renders nothing. The build fails if a photo has no alt text. Documentary photography only; no stock images.
+**Add a photograph.** Save it as `src/assets/photos/<slot>.jpg` using a slot name from `src/config/photos.ts`, and write its `alt` there describing what it actually shows. Until a file exists the slot renders nothing. The build fails if a photo has no alt text. Documentary photography only; no stock images. Until a programme photo exists, `/programmes` shows a line-art illustration in its place, and About shows the sunrise illustration until the founder portrait exists.
+
+**Change the logo.** Replace `design/brand/logo-source.png` (white line art on black, same layout) and run `npm run brand`, then `npm run og`. If the layout differs, adjust the crop bands at the top of `scripts/brand-assets.mjs`.
 
 **Add the consented quote on Home.** Fill `home.problem.quote` in `src/content/pages/home.ts` and set `consentConfirmed: true`.
 

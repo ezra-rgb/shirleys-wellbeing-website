@@ -1,0 +1,50 @@
+---
+/**
+ * Brand illustration: the three walking figures from the logo heading towards a rising sun.
+ * Dark ground, one warm light ahead: the "dark into light" idea in a single picture.
+ * The sun and arcs are decorative SVG; the figures carry the alt text.
+ */
+import { Image } from 'astro:assets';
+import mark from '../assets/brand/logo-mark.png';
+interface Props { class?: string; loading?: 'lazy' | 'eager' }
+const { class: cls, loading = 'eager' } = Astro.props;
+---
+<figure class:list={['horizon', cls]}>
+  <svg class="horizon-sky" viewBox="0 0 600 520" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="hh-sun" cx="50%" cy="100%" r="100%">
+        <stop offset="0" stop-color="var(--hope-sun)" stop-opacity="0.9" />
+        <stop offset="0.55" stop-color="var(--hope-coral)" stop-opacity="0.6" />
+        <stop offset="1" stop-color="var(--hope-coral)" stop-opacity="0.35" />
+      </radialGradient>
+      <radialGradient id="hh-glow">
+        <stop offset="0" stop-color="var(--hope-sun)" stop-opacity="0.25" />
+        <stop offset="1" stop-color="var(--hope-sun)" stop-opacity="0" />
+      </radialGradient>
+      <clipPath id="hh-above"><rect width="600" height="430" /></clipPath>
+    </defs>
+    <ellipse cx="300" cy="440" rx="290" ry="75" fill="url(#hh-glow)" />
+    <g clip-path="url(#hh-above)">
+      <g class="horizon-rise">
+        <circle cx="300" cy="430" r="360" fill="none" stroke="var(--hope-leaf)" stroke-width="2" stroke-opacity="0.55" />
+        <circle cx="300" cy="430" r="310" fill="none" stroke="var(--hope-sky)" stroke-width="2" stroke-opacity="0.65" />
+        <circle cx="300" cy="430" r="265" fill="none" stroke="var(--hope-lilac)" stroke-width="2" stroke-opacity="0.75" />
+        <circle cx="300" cy="430" r="225" fill="url(#hh-sun)" />
+      </g>
+    </g>
+    <g stroke="var(--dark-text)" stroke-linecap="round" fill="none">
+      <path d="M40 430H560" stroke-opacity="0.5" stroke-width="2" />
+      <path d="M90 452H230M330 452H500" stroke-opacity="0.3" stroke-width="2" />
+      <path d="M150 474H260M360 474H440" stroke-opacity="0.18" stroke-width="2" />
+    </g>
+  </svg>
+  <Image src={mark} alt="Line drawing of three people walking arm in arm towards a rising sun" widths={[320, 480, 720]}
+         sizes="(max-width: 900px) 60vw, 360px" class="horizon-figures" loading={loading} />
+</figure>
+<style>
+  .horizon { position: relative; margin: 0; aspect-ratio: 600 / 520; width: 100%; }
+  .horizon-sky { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .horizon-figures { position: absolute; left: 19%; width: 62%; bottom: 7%; height: auto; }
+  .horizon-rise { animation: hh-rise 2.4s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  @keyframes hh-rise { from { transform: translateY(60px); opacity: 0; } to { transform: none; opacity: 1; } }
+</style>

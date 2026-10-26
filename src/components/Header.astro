@@ -1,13 +1,13 @@
 ---
-/** Dark site header: wordmark left, three links and the "Talk to us" CTA right. Collapses to a menu below 860px. */
+/** Dark site header: logo left, three links and the "Talk to us" CTA right. Collapses to a menu below 860px. */
 import { primaryNav, primaryCta } from '../config/navigation';
-import Wordmark from './Wordmark.astro';
+import Logo from './Logo.astro';
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1') || '/';
 const current = (href: string) => (href === path ? 'page' : undefined);
 ---
 <header class="site-header tone-dark">
   <div class="container header-inner">
-    <Wordmark />
+    <Logo />
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
       <span class="menu-label">Menu</span>
       <svg class="ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
@@ -43,6 +43,8 @@ const current = (href: string) => (href === path ? 'page' : undefined);
 </script>
 <style>
   .site-header { position: relative; z-index: 20; }
+  /* A thin band of dawn colour: the splash of hope that runs across every page. */
+  .site-header::after { content: ''; display: block; height: 3px; background: var(--dawn); }
   .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 80px; }
   .nav-list { display: flex; align-items: center; gap: 0.25rem 1.75rem; list-style: none; }
   .nav-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 1rem; color: var(--dark-text); text-decoration: none; border-bottom: 1px solid transparent; }

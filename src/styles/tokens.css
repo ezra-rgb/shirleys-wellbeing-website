@@ -26,6 +26,15 @@
   --teal: #1e5e58;
   --teal-hover: #174a45;
 
+  /* Hope: splashes of colour against the serious dark ground. Decorative only
+     (rules, icons, illustration), never body text on light grounds. */
+  --hope-sun: #f2b544;
+  --hope-coral: #e8846b;
+  --hope-sky: #7fb4e0;
+  --hope-leaf: #86c29a;
+  --hope-lilac: #b39ddb;
+  --dawn: linear-gradient(90deg, var(--hope-lilac), var(--hope-sky) 25%, var(--hope-leaf) 50%, var(--hope-sun) 75%, var(--hope-coral));
+
   /* Type */
   --font-head: 'Archivo', 'Arial Black', system-ui, sans-serif;
   --font-body: 'Public Sans Variable', 'Public Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;

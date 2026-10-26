@@ -18,6 +18,7 @@ export const programmes = {
     {
       id: 'programme-beyond-the-tills',
       photo: 'programme-beyond-the-tills' as const,
+      art: 'beyond-the-tills' as const,
       status: 'In development',
       title: 'Beyond the Tills',
       text: "A 12-week wellbeing and recovery programme for retail workers who are still feeling the effects of violence or abuse at work. Weekly group sessions, practical workshops and six 1:1 coaching sessions, with separate groups for staff and managers. You do not have to tell us what happened.",
@@ -26,6 +27,7 @@ export const programmes = {
     {
       id: 'programme-move',
       photo: 'programme-move' as const,
+      art: 'move' as const,
       status: 'Piloting now',
       title: 'MOVE',
       text: "Weekly movement sessions with music, for every fitness level. A way to feel better in your body and spend time with people who understand the job. It's for wellbeing, not a replacement for therapy.",

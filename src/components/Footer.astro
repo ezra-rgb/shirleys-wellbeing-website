@@ -5,6 +5,8 @@
  */
 import { site } from '../config/site';
 import { legalNav } from '../config/navigation';
+import { Image } from 'astro:assets';
+import stacked from '../assets/brand/logo-stacked.png';
 interface Props { showContact?: boolean }
 const { showContact = true } = Astro.props;
 const { legal } = site;
@@ -45,7 +47,10 @@ const { legal } = site;
         </ul>
       </nav>
     </div>
-    <p class="footer-tagline">{site.tagline}</p>
+    <div class="footer-brand">
+      <Image src={stacked} alt="Shirley's Wellbeing CIC logo: three people walking arm in arm" width={150} densities={[1, 2]} class="footer-logo" />
+      <p class="footer-tagline">{site.tagline}</p>
+    </div>
   </div>
 </footer>
 <style>
@@ -69,6 +74,9 @@ const { legal } = site;
   .legal-line a { color: var(--dark-secondary); }
   .legal-links { display: flex; flex-wrap: wrap; gap: 0 1.5rem; list-style: none; }
   .legal-links a { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.875rem; color: var(--dark-secondary); text-decoration: underline; }
-  .footer-tagline { margin: 1rem 0 0; font-family: var(--font-body); font-weight: 700; color: var(--amber); }
+  .footer-brand { display: flex; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; margin-top: var(--space-4); }
+  .footer-logo { width: 150px; height: auto; }
+  .footer-tagline { margin: 0; font-family: var(--font-body); font-weight: 700; color: var(--amber); }
+  .footer-tagline::after { content: ''; display: block; height: 3px; margin-top: 0.5rem; background: var(--dawn); border-radius: 2px; }
   @media (max-width: 860px) { .footer-top { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); } }
 </style>

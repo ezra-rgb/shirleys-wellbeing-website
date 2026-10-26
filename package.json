@@ -10,7 +10,8 @@
     "prebuild": "node scripts/check-content.mjs",
     "build": "astro build && node scripts/check-dist.mjs",
     "preview": "astro preview",
-    "og": "node scripts/og-image.mjs"
+    "og": "node scripts/og-image.mjs",
+    "brand": "node scripts/brand-assets.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.2.1",

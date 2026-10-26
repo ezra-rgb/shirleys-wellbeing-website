@@ -24,7 +24,7 @@ Last reviewed: 7 October 2026.
 
 ## 3. Company information
 - Company number 17308401 and registered office (10 Fowler Road, Sutton Coldfield, England, B75 7LW) were taken from Companies House on 7 October 2026. Confirm this is the address you want published (it is a public record and legally required on the website). If the registered office changes, edit `src/config/site.ts`.
-- Final logo files (the header, favicon and OG image use a text wordmark).
+- Logo: done 26 October 2026 from "Shirley's Wellbeing Community Logo.png" (header, footer, favicon, OG image). A vector (SVG/PDF) master would give sharper results if one exists.
 
 ## 4. Contact / support information
 - Retail Trust helpline 0808 801 0808 (24 hours) was verified on retailtrust.org.uk on 7 October 2026. Recheck periodically.

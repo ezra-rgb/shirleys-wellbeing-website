@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Photo from '../components/Photo.astro';
 import Expectations from '../components/Expectations.astro';
+import HopeHorizon from '../components/HopeHorizon.astro';
+import RouteIcon from '../components/RouteIcon.astro';
 import { hasPhoto } from '../lib/photos';
 import { home } from '../content/pages/home';
 import { site } from '../config/site';
@@ -12,15 +14,18 @@ const showEvidencePhoto = hasPhoto('home-evidence');
 <BaseLayout title={home.meta.title} description={home.meta.description}>
   <!-- Dark hero -->
   <section class="hero tone-dark" aria-labelledby="hero-title">
-    <div class="container">
-      <p class="eyebrow">{hero.eyebrow}</p>
-      <h1 id="hero-title" class="hero-title">{hero.title}</h1>
-      <p class="lead hero-lead">{hero.lead}</p>
-      <div class="button-row">
-        <a class="button button-amber" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
-        <a class="button button-ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+    <div class="container hero-split">
+      <div>
+        <p class="eyebrow">{hero.eyebrow}</p>
+        <h1 id="hero-title" class="hero-title">{hero.title}</h1>
+        <p class="lead hero-lead">{hero.lead}</p>
+        <div class="button-row">
+          <a class="button button-amber" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
+          <a class="button button-ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+        </div>
+        <p class="caption hero-note">{site.locationLine}</p>
       </div>
-      <p class="caption hero-note">{site.locationLine}</p>
+      <HopeHorizon class="hero-art" />
     </div>
   </section>
 
@@ -63,6 +68,7 @@ const showEvidencePhoto = hasPhoto('home-evidence');
       <ul class="routes">
         {howWeHelp.routes.map((r) => (
           <li class="card route tone-card">
+            <RouteIcon name={r.title} />
             <h3 class="route-title">{r.title}</h3>
             <p>{r.text}{r.strong && <> <strong>{r.strong}</strong></>}</p>
             <a class="text-link route-link" href={r.link.href}>{r.link.label}</a>
@@ -101,13 +107,17 @@ const showEvidencePhoto = hasPhoto('home-evidence');
 </BaseLayout>
 <style>
   .hero { padding-block: clamp(3.5rem, 2rem + 5vw, 6.5rem) clamp(4rem, 2.5rem + 5vw, 6.5rem); }
+  .hero-split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-5); align-items: center; }
+  .hero-art { max-width: 520px; justify-self: end; }
   .hero-title { max-width: 52rem; margin-bottom: 1.75rem; }
   .hero-lead { max-width: 33rem; margin-bottom: 2.25rem; }
   .hero-note { margin-top: 2rem; }
 
   .problem h2 { margin-bottom: 1.25rem; }
   .stats { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-5); }
-  .stat { border-top: 2px solid var(--amber); padding-top: 1rem; }
+  .stat { border-top: 3px solid var(--hope-sun); padding-top: 1rem; }
+  .stat:nth-child(2) { border-top-color: var(--hope-coral); }
+  .stat:nth-child(3) { border-top-color: var(--hope-sky); }
   .stat-figure { font-family: var(--font-head); font-weight: 800; font-size: var(--fs-stat); line-height: 1; letter-spacing: -0.03em; color: var(--head); margin-bottom: 0.75rem; }
   .stat-text { color: var(--body); margin-bottom: 0.5rem; }
   .stat-source { margin: 0; }
@@ -118,7 +128,12 @@ const showEvidencePhoto = hasPhoto('home-evidence');
 
   .help h2 { margin-bottom: 1.25rem; }
   .routes { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-5); }
-  .route { display: flex; flex-direction: column; }
+  /* Each way in gets its own colour of hope: a top band and a darker shade for the icon so it reads on white. */
+  .route { display: flex; flex-direction: column; border-top: 5px solid var(--route); --route: var(--hope-coral); --route-ink: #b4472c; }
+  .route:nth-child(2) { --route: var(--hope-sky); --route-ink: #2f6aa3; }
+  .route:nth-child(3) { --route: var(--hope-leaf); --route-ink: #2f7a4a; }
+  .route:nth-child(4) { --route: var(--hope-lilac); --route-ink: #6a4fa8; }
+  .route :global(.route-icon) { color: var(--route-ink); margin-bottom: 1rem; }
   .route p { font-size: 1rem; flex: 1; }
   .route-title { font-size: 1.1875rem; letter-spacing: 0.01em; margin-bottom: 0.9rem; }
   .route-link { margin-top: 0.75rem; font-size: 1rem; }
@@ -131,6 +146,10 @@ const showEvidencePhoto = hasPhoto('home-evidence');
   .employers-body .button-row { margin-top: 1rem; }
 
   @media (max-width: 1000px) { .routes { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 900px) {
+    .hero-split { grid-template-columns: minmax(0, 1fr); }
+    .hero-art { justify-self: center; max-width: 340px; }
+  }
   @media (max-width: 760px) {
     .stats { grid-template-columns: minmax(0, 1fr); }
   }

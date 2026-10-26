@@ -1,0 +1,15 @@
+---
+/** Header logo lockup: the three walking figures and the name, white on the dark ground. */
+import { Image } from 'astro:assets';
+import lockup from '../assets/brand/logo-lockup.png';
+interface Props { href?: string }
+const { href = '/' } = Astro.props;
+---
+<a class="logo" href={href}>
+  <Image src={lockup} alt="Shirley's Wellbeing CIC home" height={60} densities={[1, 2, 3]} loading="eager" class="logo-img" />
+</a>
+<style>
+  .logo { display: inline-flex; align-items: center; min-height: 44px; padding-block: 0.75rem; }
+  .logo-img { height: 60px; width: auto; }
+  @media (max-width: 480px) { .logo-img { height: 46px; } }
+</style>

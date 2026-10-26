@@ -1,0 +1,74 @@
+---
+/**
+ * Illustrated stand-in for a programme photograph, in the logo's white line style with
+ * splashes of hope colour. Shown only while the documentary photo slot is empty.
+ * Purely decorative: the programme text beside it carries the meaning.
+ */
+interface Props { name: 'beyond-the-tills' | 'move'; class?: string }
+const { name, class: cls } = Astro.props;
+---
+<div class:list={['programme-art', cls]} aria-hidden="true">
+  {name === 'beyond-the-tills' ? (
+    <svg viewBox="0 0 600 300" focusable="false">
+      <defs>
+        <radialGradient id="pa-sun" cx="50%" cy="100%" r="100%">
+          <stop offset="0" stop-color="var(--hope-sun)" stop-opacity="0.95" />
+          <stop offset="1" stop-color="var(--hope-coral)" stop-opacity="0.6" />
+        </radialGradient>
+        <linearGradient id="pa-spill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--hope-sun)" stop-opacity="0.35" />
+          <stop offset="1" stop-color="var(--hope-sun)" stop-opacity="0" />
+        </linearGradient>
+        <clipPath id="pa-door"><rect x="380" y="62" width="136" height="186" /></clipPath>
+      </defs>
+      <!-- Light through the open door, spilling onto the shop floor -->
+      <path d="M380 248H516L590 300H300Z" fill="url(#pa-spill)" />
+      <g clip-path="url(#pa-door)">
+        <rect x="380" y="62" width="136" height="186" fill="var(--hope-lilac)" fill-opacity="0.18" />
+        <circle cx="448" cy="248" r="150" fill="none" stroke="var(--hope-leaf)" stroke-width="2" stroke-opacity="0.7" />
+        <circle cx="448" cy="248" r="118" fill="none" stroke="var(--hope-sky)" stroke-width="2" stroke-opacity="0.8" />
+        <circle cx="448" cy="248" r="88" fill="none" stroke="var(--hope-lilac)" stroke-width="2" />
+        <circle cx="448" cy="248" r="60" fill="url(#pa-sun)" />
+      </g>
+      <g fill="none" stroke="var(--dark-text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Door frame, standing open -->
+        <path d="M374 250V56H522V250" />
+        <path d="M522 56L566 40V266L522 250" stroke-opacity="0.6" />
+        <!-- Counter and till -->
+        <path d="M40 250H330" />
+        <path d="M60 250V172H290V250" />
+        <path d="M60 192H290" stroke-opacity="0.5" />
+        <path d="M96 172V138H186V172" />
+        <path d="M108 138V112H174V138" />
+        <path d="M116 120H166" stroke-opacity="0.6" />
+        <path d="M206 172V158H262V172" stroke-opacity="0.7" />
+        <!-- Shelves -->
+        <path d="M40 70H160M40 110H120" stroke-opacity="0.35" />
+        <path d="M200 70H330" stroke-opacity="0.35" />
+      </g>
+    </svg>
+  ) : (
+    <svg viewBox="0 0 600 300" focusable="false">
+      <g fill="none" stroke-width="5" stroke-linecap="round">
+        <path d="M-10 190C60 120 130 120 200 170S340 230 410 160 540 90 610 140" stroke="var(--hope-lilac)" />
+        <path d="M-10 210C60 150 130 150 200 195S340 245 410 185 540 120 610 165" stroke="var(--hope-sky)" />
+        <path d="M-10 230C60 180 130 180 200 220S340 260 410 210 540 150 610 190" stroke="var(--hope-leaf)" />
+        <path d="M-10 250C60 210 130 210 200 245S340 275 410 235 540 180 610 215" stroke="var(--hope-sun)" />
+        <path d="M-10 270C60 240 130 240 200 270S340 290 410 260 540 210 610 240" stroke="var(--hope-coral)" />
+      </g>
+      <g fill="none" stroke="var(--dark-text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <!-- Music: two beamed notes -->
+        <path d="M430 96V44L478 34V86" />
+        <path d="M430 56L478 46" />
+        <ellipse cx="420" cy="98" rx="11" ry="8" />
+        <ellipse cx="468" cy="88" rx="11" ry="8" />
+        <!-- Pulse -->
+        <path d="M60 80H120L138 48L162 112L180 80H260" stroke-opacity="0.8" />
+      </g>
+    </svg>
+  )}
+</div>
+<style>
+  .programme-art { aspect-ratio: 2 / 1; border-radius: 2px; overflow: hidden; background: var(--dark-panel); }
+  .programme-art svg { width: 100%; height: 100%; }
+</style>
