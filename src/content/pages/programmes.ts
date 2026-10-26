@@ -1,27 +1,27 @@
 /**
  * Programmes page copy. Programme text is from the V2 design (home.pdf); statuses
- * ("In development", "Piloting now") are awaiting confirmation, see docs/CONTENT-DEPENDENCIES.md.
+ * ("Register your interest", "Piloting now") are awaiting confirmation, see docs/CONTENT-DEPENDENCIES.md.
  */
 export const programmes = {
   meta: {
     title: "Programmes | Shirley's Wellbeing CIC",
     description:
-      "Beyond the Tills and MOVE: group programmes for people in retail affected by violence and abuse at work. Nobody is ever asked to describe what happened.",
+      "Beyond the Tills and MOVE: programmes for people in retail affected by violence and abuse at work, in a group or one to one. Nobody is ever asked to describe what happened.",
   },
   hero: {
     eyebrow: 'Programmes',
     title: 'Our programmes',
     lead:
-      'Group programmes for people in retail affected by violence and abuse at work. You decide how much to share, and nobody is ever asked to describe what happened.',
+      'Programmes for people in retail affected by violence and abuse at work, in a group or one to one. You decide how much to share, and nobody is ever asked to describe what happened.',
   },
   items: [
     {
       id: 'programme-beyond-the-tills',
       photo: 'programme-beyond-the-tills' as const,
       art: 'beyond-the-tills' as const,
-      status: 'In development',
+      status: 'Register your interest',
       title: 'Beyond the Tills',
-      text: "A 12-week wellbeing and recovery programme for retail workers who are still feeling the effects of violence or abuse at work. Weekly group sessions, practical workshops and six 1:1 coaching sessions, with separate groups for staff and managers. You do not have to tell us what happened.",
+      text: "A 12-week wellbeing and recovery programme for people in retail who are still feeling the effects of violence or abuse at work. Weekly group sessions, practical workshops and six 1:1 coaching sessions, with separate groups for staff and managers, or the whole 12 weeks one to one for shop owners and managers. You do not have to tell us what happened.",
       cta: { label: 'Find out about Beyond the Tills', hidden: '', href: '/beyond-the-tills' },
     },
     {

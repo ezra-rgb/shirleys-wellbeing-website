@@ -96,22 +96,26 @@ a:hover { text-decoration-thickness: 2px; }
 .button:hover { transform: translateY(-1px); box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.45); }
 
 /* Every button cycles slowly through the hope colours. Dark text passes 4.5:1 on each of them.
-   Reduced-motion users get the same gradient, standing still. */
+   Reduced-motion users get the same gradient, standing still.
+   The loop has a fixed length (not a % of the button), so narrow and wide buttons show the
+   same spread of colour, and every button looks the same on every ground, as on For employers. */
+.button-primary, .button-ghost { --loop: 400px; }
 .button-primary {
   color: var(--light-heading);
-  background: var(--hope-loop) 0 0 / 200% 100%;
+  background: var(--hope-loop) 0 0 / var(--loop) 100% repeat-x;
   animation: hope-cycle 10s linear infinite;
 }
-/* Secondary buttons: the ground shows through, with the cycling colours as the border. */
+/* Secondary buttons: always dark with light text, with the cycling colours as the border. */
 .button-ghost {
-  color: var(--head);
-  background: linear-gradient(var(--ground, var(--dark-page)), var(--ground, var(--dark-page))) padding-box,
+  color: var(--dark-text);
+  background: linear-gradient(var(--dark-page), var(--dark-page)) padding-box,
               var(--hope-loop) border-box;
-  background-size: 100% 100%, 200% 100%;
+  background-size: 100% 100%, var(--loop) 100%;
+  background-repeat: no-repeat, repeat-x;
   animation: hope-cycle-border 10s linear infinite;
 }
-@keyframes hope-cycle { to { background-position: -200% 0; } }
-@keyframes hope-cycle-border { to { background-position: 0 0, -200% 0; } }
+@keyframes hope-cycle { to { background-position: calc(-1 * var(--loop)) 0; } }
+@keyframes hope-cycle-border { to { background-position: 0 0, calc(-1 * var(--loop)) 0; } }
 .button-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
 /* Cards */

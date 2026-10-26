@@ -33,6 +33,11 @@
   --hope-sky: #7fb4e0;
   --hope-leaf: #86c29a;
   --hope-lilac: #b39ddb;
+  /* Darker shades of the hope colours, for icons and short labels on white (each passes 4.5:1). */
+  --hope-coral-ink: #b4472c;
+  --hope-sky-ink: #2f6aa3;
+  --hope-leaf-ink: #2f7a4a;
+  --hope-lilac-ink: #6a4fa8;
   /* Same colours, starting and ending on sun so a 200%-wide band loops without a seam. */
   --hope-loop: linear-gradient(90deg, var(--hope-sun), var(--hope-coral), var(--hope-lilac), var(--hope-sky), var(--hope-leaf), var(--hope-sun));
   --dawn: linear-gradient(90deg, var(--hope-lilac), var(--hope-sky) 25%, var(--hope-leaf) 50%, var(--hope-sun) 75%, var(--hope-coral));

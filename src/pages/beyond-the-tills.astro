@@ -1,22 +1,32 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Photo from '../components/Photo.astro';
+import ProgrammeArt from '../components/ProgrammeArt.astro';
+import { hasPhoto } from '../lib/photos';
+import { site } from '../config/site';
 import { btt } from '../content/pages/beyond-the-tills';
-const { hero, problem, stats, research, what, who, strands, isNot, safety, outcomes, cta } = btt;
+const { hero, problem, stats, who, oneToOne, what, research, isNot, outcomes, employers, faq, cta } = btt;
+const withPhoto = hasPhoto('programme-beyond-the-tills');
 ---
 <BaseLayout title={btt.meta.title} description={btt.meta.description}>
   <!-- Dark hero -->
   <section class="hero tone-dark" aria-labelledby="btt-title">
-    <div class="container">
-      <p class="eyebrow">{hero.eyebrow} <span class="status">· {hero.status}</span></p>
-      <h1 id="btt-title" class="hero-title">{hero.title}</h1>
-      <p class="lead hero-lead">{hero.lead}</p>
-      <p class="hero-sub">{hero.sub}</p>
-      <p class="promise">{hero.promise}</p>
-      <div class="button-row">
-        <a class="button button-primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
-        <a class="button button-ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+    <div class="container hero-split">
+      <div>
+        <p class="eyebrow">{hero.eyebrow} · {hero.status}</p>
+        <h1 id="btt-title" class="hero-title">{hero.title}</h1>
+        <p class="lead hero-lead">{hero.lead}</p>
+        <p class="hero-sub">{hero.sub}</p>
+        <p class="promise">{hero.promise}</p>
+        <div class="button-row">
+          <a class="button button-primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
+          <a class="button button-ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+        </div>
+        <p class="caption hero-note">{site.locationLine}</p>
       </div>
+      {withPhoto
+        ? <Photo slot="programme-beyond-the-tills" loading="eager" class="hero-art" />
+        : <ProgrammeArt name="beyond-the-tills" class="hero-art" />}
     </div>
   </section>
 
@@ -35,44 +45,80 @@ const { hero, problem, stats, research, what, who, strands, isNot, safety, outco
       </div>
 
       <h2 class="stats-heading" id="stats-title">{stats.heading}</h2>
-      {stats.groups.map((g) => (
-        <div class="stat-group" aria-label={g.label}>
-          <ul class="stats">
-            {g.items.map((s) => (
-              <li class="stat">
-                <p class="stat-figure">{s.figure}</p>
-                <p class="stat-text">{s.text}</p>
-              </li>
-            ))}
-          </ul>
-          <p class="caption stat-source"><strong>{g.label}.</strong> {g.href ? <a href={g.href} rel="noopener">{g.note}</a> : g.note}</p>
-        </div>
-      ))}
+      <ul class="stats" aria-labelledby="stats-title">
+        {stats.items.map((s) => (
+          <li class="stat">
+            <p class="stat-figure">{s.figure}</p>
+            <p class="stat-text">{s.text}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="caption stat-source"><strong>{stats.label}.</strong> {stats.note}</p>
     </div>
   </section>
 
-  <!-- Hard edge into light: research framing -->
-  <section class="research tone-light section" aria-labelledby="research-title">
-    <div class="container split split-narrow-wide">
-      <h2 id="research-title">{research.heading}</h2>
-      <div>
-        {research.paragraphs.map((p) => <p>{p}</p>)}
-        <p class="design-heading"><strong>{research.designHeading}</strong></p>
-        <ul class="ticks">{research.design.map((d) => <li>{d}</li>)}</ul>
-        <p class="caption research-source">Sources:</p>
-        <ul class="sources caption">
-          {research.sources.map((src) => <li><a href={src.href} rel="noopener">{src.label}</a></li>)}
-        </ul>
+  <!-- Hard edge into light: who it is for, three ways in -->
+  <section id="who-for" class="who tone-light section" aria-labelledby="who-title">
+    <div class="container">
+      <p class="eyebrow">{who.eyebrow}</p>
+      <h2 id="who-title">{who.heading}</h2>
+      <p class="lead measure-wide">{who.lead}</p>
+      <ul class="routes">
+        {who.routes.map((r) => (
+          <li class="card tone-card route">
+            <p class="route-tag">{r.tag}</p>
+            <h3 class="card-title">{r.title}</h3>
+            <p>{r.text}</p>
+            {r.link && <a class="text-link route-link" href={r.link.href}>{r.link.label}</a>}
+          </li>
+        ))}
+      </ul>
+
+      <div class="split signs-split">
+        <div>
+          <h3 class="minor-title">{who.signsIntro}</h3>
+          <ul class="bullets signs">{who.signs.map((s) => <li>{s}</li>)}</ul>
+        </div>
+        <div class="card tone-card intake">
+          <h3 class="minor-title">{who.intakeHeading}</h3>
+          <p>{who.intake}</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- What happens -->
-  <section id="what-happens" class="what tone-alt section" aria-labelledby="what-title">
+  <!-- One to one for owners and managers -->
+  <section id="one-to-one" class="one tone-alt section" aria-labelledby="one-title">
+    <div class="container">
+      <p class="eyebrow">{oneToOne.eyebrow}</p>
+      <h2 id="one-title" class="one-title">{oneToOne.heading}</h2>
+      <p class="lead measure-wide">{oneToOne.lead}</p>
+      <div class="one-grid">
+        <div>
+          <h3 class="minor-title">{oneToOne.coversHeading}</h3>
+          <ul class="covers">
+            {oneToOne.covers.map((c) => (
+              <li class="card tone-card">
+                <h4 class="cover-title">{c.title}</h4>
+                <p>{c.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="card-dark tone-panel how">
+          <h3 class="minor-title">{oneToOne.howHeading}</h3>
+          <ul class="bullets">{oneToOne.how.map((h) => <li>{h}</li>)}</ul>
+          <a class="button button-primary how-cta" href={oneToOne.cta.href}>{oneToOne.cta.label}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What happens over 12 weeks -->
+  <section id="what-happens" class="what tone-light section" aria-labelledby="what-title">
     <div class="container">
       <h2 id="what-title">{what.heading}</h2>
       <p class="lead measure-wide">{what.lead}</p>
-      <Photo slot="programme-beyond-the-tills" class="what-photo" />
       <ul class="cards">
         {what.cards.map((c, i) => (
           <li class="card tone-card">
@@ -82,64 +128,60 @@ const { hero, problem, stats, research, what, who, strands, isNot, safety, outco
           </li>
         ))}
       </ul>
+
+      <h3 class="minor-title phases-title">{what.phasesHeading}</h3>
+      <ol class="phases">
+        {what.phases.map((p) => (
+          <li>
+            <p class="phase-weeks">{p.weeks}</p>
+            <h4 class="phase-title">{p.title}</h4>
+            <p>{p.text}</p>
+          </li>
+        ))}
+      </ol>
       <p class="after">{what.after} <a href={what.afterLink.href}>{what.afterLink.label}</a>.</p>
     </div>
   </section>
 
-  <!-- Who it is for, and the two strands -->
-  <section class="who tone-light section" aria-labelledby="who-title">
-    <div class="container">
-      <div class="split">
-        <div>
-          <h2 id="who-title">{who.heading}</h2>
-          <p class="lead">{who.lead}</p>
-          <p class="intake">{who.intake}</p>
-        </div>
-        <div class="card tone-card signs">
-          <p class="signs-intro"><strong>{who.signsIntro}</strong></p>
-          <ul class="bullets">{who.signs.map((s) => <li>{s}</li>)}</ul>
-        </div>
-      </div>
-
-      <div class="strands">
-        <h2 id="strands-title">{strands.heading}</h2>
-        <p class="lead measure-wide">{strands.lead}</p>
-        <ul class="strand-grid">
-          {strands.items.map((s) => (
-            <li>
-              <h3 class="card-title">{s.title}</h3>
-              <p>{s.text}</p>
-            </li>
-          ))}
+  <!-- Research framing -->
+  <section class="research tone-alt section" aria-labelledby="research-title">
+    <div class="container split">
+      <div>
+        <h2 id="research-title">{research.heading}</h2>
+        {research.paragraphs.map((p) => <p>{p}</p>)}
+        <p class="caption research-source">Sources:</p>
+        <ul class="sources caption">
+          {research.sources.map((src) => <li><a href={src.href} rel="noopener">{src.label}</a></li>)}
         </ul>
+      </div>
+      <div class="card tone-card design">
+        <h3 class="minor-title">{research.designHeading}</h3>
+        <ul class="ticks">{research.design.map((d) => <li>{d}</li>)}</ul>
       </div>
     </div>
   </section>
 
   <!-- Support, not treatment -->
-  <section class="isnot tone-alt section" aria-labelledby="isnot-title">
+  <section class="isnot tone-light section" aria-labelledby="isnot-title">
     <div class="container">
       <h2 id="isnot-title">{isNot.heading}</h2>
       <div class="isnot-grid">
-        {[{ ...isNot.is, cls: 'label-are' }, { ...isNot.not, cls: 'label-not' }].map((col) => (
-          <div class="card tone-card">
-            <h3 class:list={['eyebrow', col.cls]}>{col.label}</h3>
-            <ul class="bullets">{col.items.map((i) => <li>{i}</li>)}</ul>
+        {isNot.columns.map((col, i) => (
+          <div class:list={[i === 2 ? 'card-dark tone-panel share' : 'card tone-card']}>
+            <h3 class="minor-title">{col.label}</h3>
+            <ul class="bullets">{col.items.map((item) => <li>{item}</li>)}</ul>
           </div>
         ))}
       </div>
-      <p class="signpost">{isNot.signpost} <a href={isNot.signpostLink.href}>{isNot.signpostLink.label}</a>.</p>
-
-      <div class="safety card-dark tone-panel">
-        <h2 class="safety-title">{safety.heading}</h2>
-        <ul class="safety-list">{safety.items.map((s) => <li>{s}</li>)}</ul>
-        <p class="safety-foot"><a href={safety.link.href}>{safety.link.label}</a></p>
-      </div>
+      <p class="signpost">
+        {isNot.signpost}{' '}
+        {isNot.links.map((l, i) => <>{i > 0 && ' · '}<a href={l.href}>{l.label}</a></>)}
+      </p>
     </div>
   </section>
 
   <!-- Outcomes -->
-  <section class="outcomes tone-light section" aria-labelledby="outcomes-title">
+  <section class="outcomes tone-alt section" aria-labelledby="outcomes-title">
     <div class="container">
       <h2 id="outcomes-title">{outcomes.heading}</h2>
       <ul class="outcome-grid">
@@ -154,22 +196,74 @@ const { hero, problem, stats, research, what, who, strands, isNot, safety, outco
     </div>
   </section>
 
-  <!-- Closing CTA -->
-  <section class="closing tone-panel section" aria-labelledby="closing-title">
+  <!-- Back to dark: for employers -->
+  <section id="employers" class="employers tone-panel section" aria-labelledby="employers-title">
     <div class="container">
+      <p class="eyebrow">{employers.eyebrow}</p>
+      <h2 id="employers-title">{employers.heading}</h2>
+      <p class="lead measure-wide">{employers.lead}</p>
+      <ul class="employer-grid">
+        {employers.cards.map((c) => (
+          <li class="card-dark tone-dark employer-card">
+            <h3 class="minor-title">{c.title}</h3>
+            <p>{c.text}{c.link && <> <a href={c.link.href}>{c.link.label}</a>.</>}</p>
+          </li>
+        ))}
+      </ul>
+      <div class="button-row employers-cta">
+        <a class="button button-primary" href={employers.primaryCta.href}>{employers.primaryCta.label}</a>
+        <a class="button button-ghost" href={employers.secondaryCta.href}>{employers.secondaryCta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Questions -->
+  <section id="questions" class="faq tone-light section" aria-labelledby="faq-title">
+    <div class="container faq-inner">
+      <h2 id="faq-title">{faq.heading}</h2>
+      <div class="faq-list">
+        {faq.items.map((f, i) => (
+          <details open={i === 0}>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="closing tone-dark section" aria-labelledby="closing-title">
+    <div class="container closing-inner">
       <h2 id="closing-title" class="closing-title">{cta.heading}</h2>
-      <p class="lead measure-wide">{cta.text}</p>
-      <a class="button button-primary" href={cta.primary.href}>{cta.primary.label}</a>
+      <p class="lead">{cta.text}</p>
+      <div class="button-row closing-buttons">
+        <a class="button button-primary" href={cta.primary.href}>{cta.primary.label}</a>
+        <a class="button button-ghost" href={cta.secondary.href}>{cta.secondary.label}</a>
+      </div>
+      <p class="closing-contact">
+        <a href={site.contact.phoneHref}>{site.contact.phoneDisplay}</a> · <a href={site.contact.emailHref}>{site.contact.email}</a>
+      </p>
     </div>
   </section>
 </BaseLayout>
 <style>
+  /* Hope colours, one per item, in dawn order. Darker "ink" shades are used for text on white. */
+  .route, .cards > li, .phases > li, .outcome-grid > li { --hope: var(--hope-coral); --ink: var(--hope-coral-ink); }
+  :is(.route, .cards > li, .phases > li, .outcome-grid > li):nth-child(2) { --hope: var(--hope-sky); --ink: var(--hope-sky-ink); }
+  :is(.cards > li, .phases > li, .outcome-grid > li):nth-child(3) { --hope: var(--hope-leaf); --ink: var(--hope-leaf-ink); }
+  :is(.cards > li, .phases > li, .outcome-grid > li):nth-child(4) { --hope: var(--hope-lilac); --ink: var(--hope-lilac-ink); }
+  /* The new one-to-one route stands out in sun, like the light ahead in the illustration. */
+  .route:nth-child(3) { --hope: var(--hope-sun); --ink: var(--amber-text); }
+
   .hero { padding-block: clamp(3.5rem, 2rem + 5vw, 6.5rem); }
-  .status { color: var(--dark-caption); }
+  .hero-split { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-5); align-items: center; }
+  .hero :global(.hero-art) { width: 100%; max-width: 520px; justify-self: end; }
   .hero-title { max-width: 16ch; margin-bottom: 1.75rem; }
   .hero-lead { max-width: 36rem; margin-bottom: 0.75rem; }
   .hero-sub { max-width: 36rem; color: var(--dark-secondary); }
-  .promise { display: inline-block; margin: 0.5rem 0 2.25rem; padding-left: 1rem; border-left: 3px solid var(--amber); font-weight: 650; color: var(--dark-text); font-size: var(--fs-lead); }
+  .promise { display: inline-block; margin: 0.5rem 0 2.25rem; padding-left: 1rem; border-left: 3px solid var(--hope-sun); font-weight: 650; color: var(--dark-text); font-size: var(--fs-lead); }
+  .hero-note { margin-top: 2rem; }
 
   .problem h2 { margin-bottom: 1.25rem; }
   .areas-intro { color: var(--dark-text); font-weight: 600; margin-bottom: 0.75rem; }
@@ -177,73 +271,104 @@ const { hero, problem, stats, research, what, who, strands, isNot, safety, outco
   .areas li { padding-block: 0.85rem; border-bottom: 1px solid var(--dark-rule); color: var(--dark-text); }
 
   .stats-heading { margin-top: var(--space-6); font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem); }
-  .stat-group { margin-top: var(--space-4); }
-  .stats { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
-  .stat { border-top: 2px solid var(--amber); padding-top: 1rem; }
+  .stats { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-4); }
+  .stat { border-top: 3px solid var(--hope-sun); padding-top: 1rem; }
+  .stat:nth-child(2) { border-top-color: var(--hope-coral); }
+  .stat:nth-child(3) { border-top-color: var(--hope-sky); }
   .stat-figure { font-family: var(--font-head); font-weight: 800; font-size: var(--fs-stat); line-height: 1; letter-spacing: -0.03em; color: var(--head); margin-bottom: 0.75rem; }
   .stat-text { margin: 0; }
-  .stat-source { margin-top: 1rem; }
+  .stat-source { margin-top: 1.5rem; }
   .stat-source strong { color: var(--dark-secondary); }
-  .stat-source a { color: var(--caption); display: inline-flex; align-items: center; min-height: 44px; }
 
-  .research h2 { margin: 0; }
-  .design-heading { margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--head); }
-  .ticks { list-style: none; display: grid; gap: 0.5rem; }
+  .card-title { font-size: 1.25rem; margin-bottom: 0.6rem; }
+  .minor-title { font-size: 1.125rem; margin-bottom: 0.85rem; letter-spacing: -0.01em; }
+
+  .who h2, .one h2, .what h2, .isnot h2, .outcomes h2, .employers h2 { margin-bottom: 1rem; }
+  .routes { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-4); }
+  .route { display: flex; flex-direction: column; border-top: 5px solid var(--hope); }
+  .route p { font-size: 1rem; }
+  .route-tag { font-size: var(--fs-eyebrow) !important; font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.75rem; }
+  .route-link { margin-top: auto; }
+  .signs-split { margin-top: var(--space-5); }
+  .signs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem 1.5rem; font-size: 1rem; }
+  .intake p { font-size: 1rem; }
+
+  .one-title { max-width: 18ch; }
+  .one-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--space-4); margin-top: var(--space-5); align-items: start; }
+  .covers { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+  .covers .card { padding: 1.25rem 1.25rem 1.5rem; }
+  .covers p { font-size: 1rem; }
+  .cover-title { font-size: 1.0625rem; margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+  .how { padding: clamp(1.75rem, 1rem + 2vw, 2.5rem); border-top: 5px solid var(--hope-sun); }
+  .how .bullets { font-size: 1rem; color: var(--dark-text); }
+  .how-cta { margin-top: 1.75rem; }
+
+  .cards { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-4); }
+  .cards p { font-size: 1rem; }
+  .num { display: block; font-family: var(--font-head); font-weight: 800; font-size: 1.75rem; color: var(--ink); margin-bottom: 0.5rem; }
+  .phases-title { margin-top: var(--space-6); }
+  .phases { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
+  .phases li { border-top: 4px solid var(--hope); padding-top: 1rem; }
+  .phases p { font-size: 1rem; }
+  .phase-weeks { font-size: var(--fs-caption) !important; font-weight: 650; color: var(--ink); margin-bottom: 0.25rem; }
+  .phase-title { font-size: 1.125rem; margin-bottom: 0.4rem; letter-spacing: -0.01em; }
+  .after { margin-top: var(--space-4); max-width: 46rem; }
+
+  .research h2 { margin-bottom: 1.25rem; }
+  .design { padding: 2rem 1.75rem; }
+  .ticks { list-style: none; display: grid; gap: 0.6rem; }
   .ticks li { padding-left: 1.75rem; position: relative; color: var(--head); font-weight: 500; }
-  .ticks li::before { content: ''; position: absolute; left: 0; top: 0.45em; width: 0.9rem; height: 0.5rem; border-left: 2px solid var(--teal); border-bottom: 2px solid var(--teal); transform: rotate(-45deg); }
+  .ticks li::before { content: ''; position: absolute; left: 0; top: 0.45em; width: 0.9rem; height: 0.5rem; border-left: 2px solid var(--hope-leaf-ink); border-bottom: 2px solid var(--hope-leaf-ink); transform: rotate(-45deg); }
   .research-source { margin: 1.5rem 0 0.25rem; }
   .sources { list-style: none; display: grid; gap: 0.25rem; }
   .sources a { color: var(--light-body); display: inline-block; padding-block: 0.7rem; min-height: 44px; }
 
-  .what h2 { margin-bottom: 1rem; }
-  .what :global(.what-photo) { margin-top: var(--space-4); }
-  .cards { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-4); }
-  .cards p { font-size: 1rem; }
-  .num { display: block; font-family: var(--font-head); font-weight: 800; color: var(--teal); margin-bottom: 0.5rem; }
-  .card-title { font-size: 1.25rem; margin-bottom: 0.6rem; }
-  .after { margin-top: var(--space-4); max-width: 44rem; }
-
-  .who h2 { margin-bottom: 1rem; }
-  .intake { margin-top: 1rem; }
-  .signs { padding: 2rem 1.75rem; }
-  .signs-intro { color: var(--head); margin-bottom: 0.75rem; }
-  .signs .bullets { font-size: 1rem; }
-  .strands { margin-top: var(--space-6); }
-  .strands h2 { margin-bottom: 1rem; }
-  .strand-grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-top: var(--space-4); }
-  .strand-grid li { border-top: 2px solid var(--light-heading); padding-top: 1rem; }
-
-  .isnot h2 { margin-bottom: var(--space-4); }
-  .isnot-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
-  .isnot-grid .card { padding: 2rem 1.75rem; }
+  .isnot-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-4); }
+  .isnot-grid > div { padding: 2rem 1.75rem; }
   .isnot-grid .bullets { font-size: 1rem; }
-  .label-are { color: var(--teal); }
-  .label-not { color: var(--amber-text); }
+  .share { border-top: 5px solid var(--hope-sun); }
+  .share .bullets { color: var(--dark-text); }
   .signpost { margin-top: 1.5rem; }
 
-  .safety { margin-top: var(--space-6); padding: clamp(1.75rem, 1rem + 2.5vw, 3rem); border-left: 4px solid var(--amber); }
-  .safety-title { font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem); margin-bottom: 1.25rem; }
-  .safety-list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 2rem; }
-  .safety-list li { padding-block: 0.85rem; border-bottom: 1px solid var(--dark-rule); color: var(--dark-text); }
-  .safety-foot { margin-top: 1.25rem; }
-  .safety-foot a { display: inline-flex; align-items: center; min-height: 44px; color: var(--dark-text); }
-
-  .outcomes h2 { margin-bottom: var(--space-4); }
-  .outcome-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
-  .outcome-grid li { border-top: 2px solid var(--teal); padding-top: 1rem; }
+  .outcome-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; margin-top: var(--space-4); }
+  .outcome-grid li { border-top: 4px solid var(--hope); padding-top: 1rem; }
   .outcome-grid p { font-size: 1rem; }
   .outcomes-note { margin-top: var(--space-4); }
 
+  .employer-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-4); }
+  .employer-card { padding: 1.5rem 1.25rem; background: var(--dark-page); }
+  .employer-card p { font-size: 1rem; }
+  .employers-cta { margin-top: var(--space-4); }
+
+  .faq-inner { max-width: 50rem; }
+  .faq-list { margin-top: var(--space-4); border-top: 1px solid var(--rule); }
+  .faq details { border-bottom: 1px solid var(--rule); }
+  .faq summary { display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 56px; padding-block: 0.9rem; cursor: pointer; list-style: none; font-weight: 650; color: var(--head); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; flex: none; font-size: 1.5rem; line-height: 1; color: var(--teal); }
+  .faq details[open] summary::after { content: '−'; }
+  .faq details p { padding-bottom: 1.25rem; max-width: 44rem; }
+
+  .closing-inner { text-align: center; display: grid; justify-items: center; }
   .closing-title { max-width: 20ch; margin-bottom: 1rem; }
-  .closing .lead { margin-bottom: 2rem; }
+  .closing .lead { max-width: 38rem; margin-bottom: 2rem; }
+  .closing-buttons { justify-content: center; }
+  .closing-contact { margin-top: 2rem; font-weight: 650; }
+  .closing-contact a { display: inline-flex; align-items: center; min-height: 44px; }
 
   @media (max-width: 1000px) {
-    .cards, .outcome-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cards, .outcome-grid, .phases, .employer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .one-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .hero-split { grid-template-columns: minmax(0, 1fr); }
+    .hero :global(.hero-art) { justify-self: start; max-width: 420px; }
+    .routes, .isnot-grid { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 760px) {
-    .stats, .strand-grid, .isnot-grid, .safety-list { grid-template-columns: minmax(0, 1fr); }
+    .stats { grid-template-columns: minmax(0, 1fr); }
   }
   @media (max-width: 560px) {
-    .cards, .outcome-grid, .areas { grid-template-columns: minmax(0, 1fr); }
+    .cards, .outcome-grid, .phases, .employer-grid, .covers, .areas, .signs { grid-template-columns: minmax(0, 1fr); }
   }
 </style>

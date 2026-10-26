@@ -50,7 +50,6 @@ const current = (href: string) => (href === path ? 'page' : undefined);
   .nav-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 1rem; color: var(--dark-text); text-decoration: none; border-bottom: 1px solid transparent; }
   .nav-link:hover { border-bottom-color: var(--dark-caption); }
   .nav-link[aria-current='page'] { border-bottom-color: var(--dark-text); }
-  .nav-cta { min-height: 44px; padding-block: 0.6rem; }
   .menu-toggle { display: none; align-items: center; gap: 0.5rem; min-height: 44px; min-width: 44px; padding: 0 0.75rem; background: transparent; color: var(--dark-text); border: 1px solid var(--dark-rule); border-radius: var(--radius-button); font: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; }
   .menu-toggle[aria-expanded='true'] .ico-open, .menu-toggle[aria-expanded='false'] .ico-close { display: none; }
   @media (max-width: 860px) {
@@ -65,6 +64,6 @@ const current = (href: string) => (href === path ? 'page' : undefined);
     .nav-link:hover, .nav-link[aria-current='page'] { border-bottom-color: var(--dark-rule); }
     .nav-link[aria-current='page'] { font-weight: 700; }
     .nav-cta-item { margin-top: 1.25rem; }
-    .nav-cta { width: 100%; min-height: 52px; }
+    .nav-cta { width: 100%; }
   }
 </style>

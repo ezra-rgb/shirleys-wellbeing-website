@@ -129,10 +129,10 @@ const showEvidencePhoto = hasPhoto('home-evidence');
   .help h2 { margin-bottom: 1.25rem; }
   .routes { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-5); }
   /* Each way in gets its own colour of hope: a top band and a darker shade for the icon so it reads on white. */
-  .route { display: flex; flex-direction: column; border-top: 5px solid var(--route); --route: var(--hope-coral); --route-ink: #b4472c; }
-  .route:nth-child(2) { --route: var(--hope-sky); --route-ink: #2f6aa3; }
-  .route:nth-child(3) { --route: var(--hope-leaf); --route-ink: #2f7a4a; }
-  .route:nth-child(4) { --route: var(--hope-lilac); --route-ink: #6a4fa8; }
+  .route { display: flex; flex-direction: column; border-top: 5px solid var(--route); --route: var(--hope-coral); --route-ink: var(--hope-coral-ink); }
+  .route:nth-child(2) { --route: var(--hope-sky); --route-ink: var(--hope-sky-ink); }
+  .route:nth-child(3) { --route: var(--hope-leaf); --route-ink: var(--hope-leaf-ink); }
+  .route:nth-child(4) { --route: var(--hope-lilac); --route-ink: var(--hope-lilac-ink); }
   .route :global(.route-icon) { color: var(--route-ink); margin-bottom: 1rem; }
   .route p { font-size: 1rem; flex: 1; }
   .route-title { font-size: 1.1875rem; letter-spacing: 0.01em; margin-bottom: 0.9rem; }
