@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SponsorBand from '../components/SponsorBand.astro';
+import { site } from '../config/site';
+import { sponsorsPage } from '../content/pages/sponsors';
+const { hero, current, ways, expect, closing } = sponsorsPage;
+---
+<BaseLayout title={sponsorsPage.meta.title} description={sponsorsPage.meta.description}>
+  <!-- Dark hero -->
+  <section class="hero tone-dark" aria-labelledby="sponsors-title">
+    <div class="container">
+      <p class="eyebrow">{hero.eyebrow}</p>
+      <h1 id="sponsors-title" class="hero-title">{hero.title}</h1>
+      <p class="lead hero-lead">{hero.lead}</p>
+      <div class="button-row">
+        <a class="button button-primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
+        <a class="button button-ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current sponsors: scrolling logo band -->
+  <section id="current" class="current tone-strip section" aria-labelledby="current-title">
+    <div class="container">
+      <h2 id="current-title" class="current-title">{current.heading}</h2>
+      <p class="current-text">{current.text}</p>
+      <SponsorBand />
+    </div>
+  </section>
+
+  <!-- Hard edge into light: ways to sponsor -->
+  <section id="ways" class="ways tone-light section" aria-labelledby="ways-title">
+    <div class="container">
+      <p class="eyebrow">{ways.eyebrow}</p>
+      <h2 id="ways-title">{ways.heading}</h2>
+      <p class="lead measure-wide">{ways.lead}</p>
+      <ul class="way-grid">
+        {ways.items.map((w) => (
+          <li class="card tone-card way">
+            <p class="way-tag">{w.tag}</p>
+            <h3 class="way-title">{w.title}</h3>
+            <p>{w.text}</p>
+            <a class="text-link way-link" href={w.link.href}>{w.link.label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- What sponsors can expect -->
+  <section class="expect tone-alt section" aria-labelledby="expect-title">
+    <div class="container">
+      <h2 id="expect-title">{expect.heading}</h2>
+      <ul class="expect-grid">
+        {expect.items.map((e) => (
+          <li>
+            <h3 class="card-title">{e.title}</h3>
+            <p>{e.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="closing tone-dark section" aria-labelledby="closing-title">
+    <div class="container closing-inner">
+      <h2 id="closing-title" class="closing-title">{closing.heading}</h2>
+      <p class="lead">{closing.text}</p>
+      <div class="button-row closing-buttons">
+        <a class="button button-primary" href={closing.primaryCta.href}>{closing.primaryCta.label}</a>
+        <a class="button button-ghost" href={closing.secondaryCta.href}>{closing.secondaryCta.label}</a>
+      </div>
+      <p class="closing-contact">
+        <a href={site.contact.phoneHref}>{site.contact.phoneDisplay}</a> · <a href={site.contact.emailHref}>{site.contact.email}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .hero { padding-block: clamp(3.5rem, 2rem + 5vw, 6.5rem); }
+  .hero-title { max-width: 16ch; margin-bottom: 1.5rem; }
+  .hero-lead { max-width: 36rem; margin-bottom: 2.25rem; }
+
+  .current-title { font-size: clamp(1.5rem, 1.3rem + 0.8vw, 2rem); margin-bottom: 0.5rem; }
+  .current-text { margin-bottom: var(--space-4); }
+
+  .ways h2, .expect h2 { margin-bottom: 1rem; }
+  .way-grid { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-4); }
+  /* One hope colour per way in, as on the Home and Beyond the Tills route cards. */
+  .way { display: flex; flex-direction: column; border-top: 5px solid var(--hope-coral); --ink: var(--hope-coral-ink); padding: 2rem 1.75rem; }
+  .way:nth-child(2) { border-top-color: var(--hope-sky); --ink: var(--hope-sky-ink); }
+  .way-tag { font-size: var(--fs-eyebrow); font-weight: 650; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.75rem; }
+  .way-title { font-size: clamp(1.375rem, 1.2rem + 0.6vw, 1.75rem); margin-bottom: 0.75rem; }
+  .way-link { margin-top: auto; padding-top: 0.75rem; }
+
+  .expect-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; margin-top: var(--space-4); }
+  .expect-grid li { border-top: 4px solid var(--hope-coral); padding-top: 1rem; }
+  .expect-grid li:nth-child(2) { border-top-color: var(--hope-sky); }
+  .expect-grid li:nth-child(3) { border-top-color: var(--hope-leaf); }
+  .expect-grid li:nth-child(4) { border-top-color: var(--hope-lilac); }
+  .expect-grid p { font-size: 1rem; }
+  .card-title { font-size: 1.25rem; margin-bottom: 0.6rem; }
+
+  .closing-inner { text-align: center; display: grid; justify-items: center; }
+  .closing-title { max-width: 20ch; margin-bottom: 1rem; }
+  .closing .lead { max-width: 38rem; margin-bottom: 2rem; }
+  .closing-buttons { justify-content: center; }
+  .closing-contact { margin-top: 2rem; font-weight: 650; }
+  .closing-contact a { display: inline-flex; align-items: center; min-height: 44px; }
+
+  @media (max-width: 1000px) { .expect-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 700px) { .way-grid { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 560px) { .expect-grid { grid-template-columns: minmax(0, 1fr); } }
+</style>

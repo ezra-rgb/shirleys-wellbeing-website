@@ -6,6 +6,8 @@
   --dark-panel: #1a1d22;
   --dark-strip: #0b0c0e;
   --dark-rule: rgba(236, 234, 228, 0.12);
+  /* Pure black behind sponsor logos, to match the black their artwork is drawn on. */
+  --logo-ground: #000000;
   --dark-text: #eceae4;
   --dark-secondary: #c9ccd1;
   --dark-caption: #a8adb5;

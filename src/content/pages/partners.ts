@@ -35,7 +35,7 @@ export const partners = {
     items: [
       { title: 'Retailers and employers', text: 'Organisations interested in referrals, commissioned programmes, consultation or support for managers and staff.' },
       { title: 'Community and professional partners', text: 'Organisations interested in collaboration, referral pathways, specialist support or community activity.' },
-      { title: 'Funders and sponsors', text: 'Organisations interested in supporting pilots, community access, programmes or venues.' },
+      { title: 'Funders and sponsors', text: 'Organisations interested in supporting pilots, community access, programmes or venues.', link: { label: 'About sponsoring', href: '/sponsors' } },
     ],
   },
   boundary: {

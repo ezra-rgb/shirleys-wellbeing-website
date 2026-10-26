@@ -44,6 +44,7 @@ const { hero, offer, ways, who, boundary } = partners;
           <li>
             <h3 class="card-title">{w.title}</h3>
             <p>{w.text}</p>
+            {w.link && <a class="text-link" href={w.link.href}>{w.link.label}</a>}
           </li>
         ))}
       </ul>
@@ -62,7 +63,7 @@ const { hero, offer, ways, who, boundary } = partners;
   .offer-grid { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin-top: var(--space-4); }
   .card-title { font-size: 1.25rem; margin-bottom: 0.6rem; }
   .offer-grid p, .who-grid p { font-size: 1rem; }
-  .offer-grid .text-link { font-size: 1rem; }
+  .offer-grid .text-link, .who-grid .text-link { font-size: 1rem; }
 
   .ways { margin-top: var(--space-6); }
   .ways h2 { margin: 0; }
