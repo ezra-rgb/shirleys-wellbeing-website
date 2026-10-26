@@ -15,7 +15,7 @@ const { page, noindex = false } = Astro.props;
       <h1 id="simple-title">{page.title}</h1>
       {page.body.map((p, i) => <p class:list={['measure-wide', i === 0 && 'lead']}>{p}</p>)}
       <div class="button-row">
-        <a class="button button-amber" href={page.primaryCta.href}>{page.primaryCta.label}</a>
+        <a class="button button-primary" href={page.primaryCta.href}>{page.primaryCta.label}</a>
         {page.secondaryCta && <a class="button button-ghost" href={page.secondaryCta.href}>{page.secondaryCta.label}</a>}
       </div>
     </div>

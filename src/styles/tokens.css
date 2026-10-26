@@ -33,6 +33,8 @@
   --hope-sky: #7fb4e0;
   --hope-leaf: #86c29a;
   --hope-lilac: #b39ddb;
+  /* Same colours, starting and ending on sun so a 200%-wide band loops without a seam. */
+  --hope-loop: linear-gradient(90deg, var(--hope-sun), var(--hope-coral), var(--hope-lilac), var(--hope-sky), var(--hope-leaf), var(--hope-sun));
   --dawn: linear-gradient(90deg, var(--hope-lilac), var(--hope-sky) 25%, var(--hope-leaf) 50%, var(--hope-sun) 75%, var(--hope-coral));
 
   /* Type */

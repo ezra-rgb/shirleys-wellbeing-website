@@ -29,17 +29,17 @@ strong { font-weight: 650; }
   --eyebrow: var(--amber); --rule: var(--dark-rule); --link: var(--dark-text); --focus: var(--focus-light);
   color: var(--body);
 }
-.tone-dark { background: var(--dark-page); }
-.tone-panel { background: var(--dark-panel); }
-.tone-strip { background: var(--dark-strip); }
+.tone-dark { background: var(--dark-page); --ground: var(--dark-page); }
+.tone-panel { background: var(--dark-panel); --ground: var(--dark-panel); }
+.tone-strip { background: var(--dark-strip); --ground: var(--dark-strip); }
 .tone-light, .tone-alt, .tone-card {
   --head: var(--light-heading); --body: var(--light-body); --caption: var(--light-body);
   --eyebrow: var(--teal); --rule: var(--light-rule); --link: var(--teal); --focus: var(--focus-dark);
   color: var(--body);
 }
-.tone-light { background: var(--light-ground); }
-.tone-alt { background: var(--light-alt); }
-.tone-card { background: var(--card); }
+.tone-light { background: var(--light-ground); --ground: var(--light-ground); }
+.tone-alt { background: var(--light-alt); --ground: var(--light-alt); }
+.tone-card { background: var(--card); --ground: var(--card); }
 
 .container { width: min(100% - 2 * var(--gutter), var(--container)); margin-inline: auto; }
 .section { padding-block: var(--section); }
@@ -88,17 +88,30 @@ a:hover { text-decoration-thickness: 2px; }
 .button {
   display: inline-flex; align-items: center; justify-content: center;
   min-height: 48px; padding: 0.75rem 1.25rem;
-  border-radius: var(--radius-button); border: 1px solid transparent;
+  border-radius: var(--radius-button); border: 2px solid transparent;
   font-family: var(--font-body); font-size: 1rem; font-weight: 650; line-height: 1.2;
   text-decoration: none; cursor: pointer; text-align: center;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.button-amber { background: var(--amber); color: var(--light-heading); }
-.button-amber:hover { background: var(--amber-hover); }
-.button-ghost { background: transparent; color: var(--head); border-color: var(--rule); border-color: color-mix(in srgb, var(--head) 40%, transparent); }
-.button-ghost:hover { border-color: var(--head); }
-.button-teal { background: var(--teal); color: #ffffff; }
-.button-teal:hover { background: var(--teal-hover); }
+.button:hover { transform: translateY(-1px); box-shadow: 0 6px 18px -8px rgba(0, 0, 0, 0.45); }
+
+/* Every button cycles slowly through the hope colours. Dark text passes 4.5:1 on each of them.
+   Reduced-motion users get the same gradient, standing still. */
+.button-primary {
+  color: var(--light-heading);
+  background: var(--hope-loop) 0 0 / 200% 100%;
+  animation: hope-cycle 10s linear infinite;
+}
+/* Secondary buttons: the ground shows through, with the cycling colours as the border. */
+.button-ghost {
+  color: var(--head);
+  background: linear-gradient(var(--ground, var(--dark-page)), var(--ground, var(--dark-page))) padding-box,
+              var(--hope-loop) border-box;
+  background-size: 100% 100%, 200% 100%;
+  animation: hope-cycle-border 10s linear infinite;
+}
+@keyframes hope-cycle { to { background-position: -200% 0; } }
+@keyframes hope-cycle-border { to { background-position: 0 0, -200% 0; } }
 .button-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
 /* Cards */

@@ -20,7 +20,7 @@ const current = (href: string) => (href === path ? 'page' : undefined);
         {primaryNav.map((item) => (
           <li><a class="nav-link" href={item.href} aria-current={item.isAnchor ? undefined : current(item.href)}>{item.label}</a></li>
         ))}
-        <li class="nav-cta-item"><a class="button button-amber nav-cta" href={primaryCta.href} aria-current={current(primaryCta.href)}>{primaryCta.label}</a></li>
+        <li class="nav-cta-item"><a class="button button-primary nav-cta" href={primaryCta.href} aria-current={current(primaryCta.href)}>{primaryCta.label}</a></li>
       </ul>
     </nav>
   </div>
